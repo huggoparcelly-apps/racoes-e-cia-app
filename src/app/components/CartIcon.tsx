@@ -1,7 +1,7 @@
 
 import { IoCartSharp } from "react-icons/io5";
 
-export default function Cart() {
+export default function CartIcon() {
   return (
     <>
       <div

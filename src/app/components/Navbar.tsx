@@ -1,9 +1,8 @@
 import { SignInButton, SignedIn, SignedOut, UserButton } from "@clerk/nextjs";
 import Link from "next/link";
-import Cart from "./CartIcon";
 import Image from "next/image";
 
-import logo from '/public/logo.png'
+import logo from '/public/logo.png';
 
 function Navbar() {
   return (
