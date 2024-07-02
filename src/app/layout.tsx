@@ -7,7 +7,7 @@ import Footer from "./components/Footer";
 import Hydrate from "./components/Hydrate";
 import Navbar from "./components/Navbar";
 import "./globals.css";
-import ShearchBar from "./components/ShearchBar";
+import SearchBar from "./components/SearchBar";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -27,7 +27,7 @@ export default function RootLayout({
         <body className={clsx(inter.className, "bg-slate-200")}>
           <Hydrate>
             <Navbar />
-            <ShearchBar />
+            <SearchBar />
             <main className="h-screen pt-32">{children}</main>
             <Footer />
           </Hydrate>
