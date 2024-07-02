@@ -28,7 +28,7 @@ export default function RootLayout({
           <Hydrate>
             <Navbar />
             <ShearchBar />
-            <main className="h-screen p-16">{children}</main>
+            <main className="h-screen pt-32">{children}</main>
             <Footer />
           </Hydrate>
         </body>
