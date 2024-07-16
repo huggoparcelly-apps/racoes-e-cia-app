@@ -3,6 +3,7 @@ import golden from "/public/racao-golden.webp";
 import premier from "/public/racao-premier.webp";
 import AddCart from "./AddCart";
 import { ProductType } from "../types/ProductType";
+import Link from "next/link";
 
 type ProductProps = {
   product: ProductType;
@@ -12,9 +13,11 @@ export default function ProductCard({ product }: ProductProps) {
   return (
     <div className="ml-4 flex flex-1 justify-between">
       <div className="flex flex-col text-base font-medium text-gray-900 ">
-        <h3>
-          <p className="w-44">{product.name}</p>
-        </h3>
+        <Link href={`/products/${product.id}`}>
+          <h3>
+            <p className="w-44">{product.name}</p>
+          </h3>
+        </Link>
 
         <p className="mt-1 text-sm text-gray-500 w-44">{product.description}</p>
 

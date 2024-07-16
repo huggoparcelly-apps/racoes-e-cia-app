@@ -6,7 +6,9 @@ import { useCartStore } from "../utils/store";
 export default function CartIcon() {
   const useStore = useCartStore();
 
-  const totalQuantity = useStore.cart?.reduce((total, item) => total + item.quantity, 0);
+  const totalQuantity = useStore.cart?.reduce((total, item) => 
+    total + (item.quantity? item.quantity : 1)
+  , 0);
   
   return (
     <>

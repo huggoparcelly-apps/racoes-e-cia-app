@@ -9,7 +9,7 @@ export default function Home() {
   const racaoGolden = {
     id: 1,
     name: "Golden Cachorro Filhote",
-    price: 90.0,
+    price: 90.00,
     image: `${golden}`,
     description: "Ração Golden Filhote Frango 2,5Kg",
   };
@@ -17,7 +17,7 @@ export default function Home() {
   const racaoPremier = {
     id: 2,
     name: "Premier Raças Espec Filhote",
-    price: 90.0,
+    price: 999.99,
     image: `${golden}`,
     description: "Ração premier raças específicas 2,5Kg",
   };
@@ -25,7 +25,7 @@ export default function Home() {
   const racaoGoldenGato = {
     id: 3,
     name: "Golden Gato Filhote",
-    price: 90.0,
+    price: 2.50,
     image: `${golden}`,
     description: "Ração Golden Filhote Frango 2,5Kg",
   };
