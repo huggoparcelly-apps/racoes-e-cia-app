@@ -5,7 +5,7 @@ export default function HomeIcon() {
   return (
     <>
       <Link
-        href='/shoppings'
+        href='/'
         className="flex items-center cursor-pointer relative"
       >
         <IoHome className="size-7"/>

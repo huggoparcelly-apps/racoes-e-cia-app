@@ -1,3 +1,4 @@
+import Link from "next/link";
 import CartIcon from "./CartIcon";
 import HomeIcon from "./HomeIcon";
 import ShoppingIcon from "./ShoppingIcon";

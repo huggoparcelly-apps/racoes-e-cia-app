@@ -1,7 +1,13 @@
+"use client";
 
 import { IoCartSharp } from "react-icons/io5";
+import { useCartStore } from "../utils/store";
 
 export default function CartIcon() {
+  const useStore = useCartStore();
+
+  const totalQuantity = useStore.cart?.reduce((total, item) => total + item.quantity, 0);
+  
   return (
     <>
       <div
@@ -15,13 +21,13 @@ export default function CartIcon() {
             text-sm 
             font-bold 
             rounded-full 
-            h-4 w-4
+            h-6 w-6
             flex items-center justify-center
             absolute
             left-5
             bottom-4"
         >
-          {/* {useStore.cart?.length} */}
+          {totalQuantity}
         </span>
       </div>
 
