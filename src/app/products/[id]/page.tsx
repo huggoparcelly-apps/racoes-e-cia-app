@@ -45,7 +45,7 @@ export default function ProductsPage({ params: { id } }: ProductPageProps) {
   const product = getProduct(id);
 
   return (
-    <div className="flex flex-col md:flex-row items-center max-w-7xl mx-auto gap-8 p-10 mt-8">
+    <div className="flex flex-col md:flex-row items-center max-w-7xl mx-auto gap-8 p-3">
       <div className="flex flex-col text-left">
         <h1 className="text-xl font-bold text-gray-800">{product.name}</h1>
         <div className="pb-4 flex flex-col items-center mt-3">
