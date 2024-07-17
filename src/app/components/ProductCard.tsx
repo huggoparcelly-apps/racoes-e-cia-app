@@ -24,11 +24,11 @@ export default function ProductCard({ product }: ProductProps) {
         <p>R$ {product.price}</p>
       </div>
 
-      <div className="flex items-end relative h-32 w-20 overflow-hidden rounded-md ">
+      <div className="flex flex-col relative h-40 w-20 overflow-hidden rounded-md ">
         <Image
           src={golden}
           alt={product.description || "Ração"}
-          className="h-full w-full object-cover object-center"
+          className="h-32 w-20 object-cover object-center"
         />
 
         <AddCart product={product} />
