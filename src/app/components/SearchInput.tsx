@@ -1,6 +1,10 @@
 import { IoSearchSharp } from "react-icons/io5";
 
-export default function SearchInput() {
+type SearchInputProps = {
+  setSearchTerm: (term: string) => void;
+};
+
+export default function SearchInput({ setSearchTerm }: SearchInputProps) {
   return (
     <div className="relative block">
       <input
@@ -8,6 +12,7 @@ export default function SearchInput() {
         placeholder="Buscar produto"
         type="text"
         name="search"
+        onChange={(e) => setSearchTerm(e.target.value)}
       />
       <IoSearchSharp className="absolute right-3 top-1/2 transform -translate-y-1/2 text-slate-400" />
     </div>

@@ -27,7 +27,7 @@ export default function RootLayout({
         <body className={clsx(inter.className, "bg-slate-200")}>
           <Hydrate>
             <Navbar />
-            <SearchBar />
+            
             <main className="h-screen pt-32">{children}</main>
             <Footer />
           </Hydrate>
