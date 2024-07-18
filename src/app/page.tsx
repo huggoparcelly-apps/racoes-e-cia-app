@@ -1,14 +1,13 @@
 'use client'
 
-import Image from "next/image";
-
-import golden from "/public/racao-golden.webp";
-import premier from "/public/racao-premier.webp";
-import goldeGato from "/public/golden-gatos.webp";
+import { getAllProducts } from "@/services/apis/getProducts";
+import { useContext, useEffect, useState } from "react";
 import ProductCard from "./components/ProductCard";
-import { ProductType } from "./types/ProductType";
-import { useState } from "react";
 import SearchBar from "./components/SearchBar";
+
+import { ProductType } from "./types/ProductType";
+import golden from "/public/racao-golden.webp";
+import { useGlobalContex } from "./Context/products";
 
 const racaoGolden:ProductType = {
   id: 1,
@@ -37,10 +36,20 @@ const racaoGoldenGato:ProductType = {
 const products:ProductType[] = [racaoGolden, racaoPremier, racaoGoldenGato];
 
 export default function Home() {
+  const {setAllProducts, allProducts } = useGlobalContex();
+  
+  useEffect(() => {
+    const getProducts = async () => {
+      const allProducts = await getAllProducts();
+      setAllProducts(allProducts);
+    };
+    getProducts();
+  }, [setAllProducts]);
 
   const [searchTerm, setSearchTerm] = useState('');
-
-  const filteredProducts = filterProductByName(searchTerm);
+  
+  const filteredProducts = allProducts
+  .filter((product: { name: string; }) => product.name.toLowerCase().includes(searchTerm.toLowerCase()));
   
   return (
     <>
@@ -49,7 +58,7 @@ export default function Home() {
         <div className="mt-8">
           <div className="flow-root">
             <ul role="list" className="-my-6 divide-y divide-gray-200">
-              {filteredProducts.map((product) => (
+              {filteredProducts.map((product: ProductType) => (
                 <li key={product.id} className="flex py-6">
                   <ProductCard product={product} />
                 </li>
@@ -63,7 +72,6 @@ export default function Home() {
 }
 
 function filterProductByName(searchTerm: string) {
-  return products.filter((product) => product.name.toLowerCase().includes(searchTerm.toLowerCase())
-  );
+  return products.filter((product) => product.name.toLowerCase().includes(searchTerm.toLowerCase()));
 }
 
