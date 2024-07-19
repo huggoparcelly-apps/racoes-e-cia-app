@@ -1,39 +1,12 @@
 'use client'
 
 import { getAllProducts } from "@/services/apis/getProducts";
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import ProductCard from "./components/ProductCard";
 import SearchBar from "./components/SearchBar";
 
-import { ProductType } from "./types/ProductType";
-import golden from "/public/racao-golden.webp";
 import { useGlobalContex } from "./Context/products";
-
-const racaoGolden:ProductType = {
-  id: 1,
-  name: "Golden Cachorro Filhote",
-  price: 90.00,
-  image: `${golden}`,
-  description: "Ração Golden Filhote Frango 2,5Kg",
-};
-
-const racaoPremier:ProductType = {
-  id: 2,
-  name: "Premier Raças Espec Filhote",
-  price: 999.99,
-  image: `${golden}`,
-  description: "Ração premier raças específicas 2,5Kg",
-};
-
-const racaoGoldenGato:ProductType = {
-  id: 3,
-  name: "Golden Gato Filhote",
-  price: 2.50,
-  image: `${golden}`,
-  description: "Ração Golden Filhote Frango 2,5Kg",
-};
-
-const products:ProductType[] = [racaoGolden, racaoPremier, racaoGoldenGato];
+import { ProductType } from "./types/ProductType";
 
 export default function Home() {
   const {setAllProducts, allProducts } = useGlobalContex();
@@ -69,9 +42,5 @@ export default function Home() {
       </div>
     </>
   );
-}
-
-function filterProductByName(searchTerm: string) {
-  return products.filter((product) => product.name.toLowerCase().includes(searchTerm.toLowerCase()));
 }
 

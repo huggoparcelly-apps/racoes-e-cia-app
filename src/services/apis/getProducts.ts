@@ -1,9 +1,8 @@
 import axios from 'axios';
 
+const BASE_URL = 'http://localhost:3001/products';
+
 export const getAllProducts = async () => {
-  console.log(process.env.BASE_API_URL);
-  
-  const BASE_URL = `http://localhost:3001/products`;
 
   try {
     const { data } = await axios.get(BASE_URL, {
@@ -15,5 +14,20 @@ export const getAllProducts = async () => {
     return data;
   } catch (error) {
     console.log(error);
+  }
+}
+
+export const getProductById = async (id: number) => {
+  try {
+    const { data } = await axios.get(`${BASE_URL}/${id}`, {
+      headers: {
+
+      },
+    });
+
+    return data;
+  } catch (error) {
+    console.log(error);
+    
   }
 }

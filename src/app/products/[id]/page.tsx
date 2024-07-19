@@ -1,39 +1,11 @@
-import { ProductType } from "@/app/types/ProductType";
+'use client'
 
-import golden from "/public/racao-golden.webp";
-import Image from "next/image";
-import AddCart from "@/app/components/AddCart";
 import AddProductCart from "@/app/components/AddProdctuCart";
-
-const racaoGolden = {
-  id: 1,
-  name: "Golden Cachorro Filhote",
-  price: 90.0,
-  image: `${golden}`,
-  description: "Ração Golden Filhote Frango 2,5Kg",
-};
-
-const racaoPremier = {
-  id: 2,
-  name: "Premier Raças Espec Filhote",
-  price: 90.0,
-  image: `${golden}`,
-  description: "Ração premier raças específicas 2,5Kg",
-};
-
-const racaoGoldenGato = {
-  id: 3,
-  name: "Golden Gato Filhote",
-  price: 90.0,
-  image: `${golden}`,
-  description: "Ração Golden Filhote Frango 2,5Kg",
-};
-
-const products = [racaoGolden, racaoPremier, racaoGoldenGato];
-
-function getProduct(id: number) {
-  return products[id - 1];
-}
+import { useGlobalContex } from "@/app/Context/products";
+import { getProductById } from "@/services/apis/getProducts";
+import Image from "next/image";
+import { useEffect } from "react";
+import golden from "/public/racao-golden.webp";
 
 type ProductPageProps = {
   params: {
@@ -42,7 +14,16 @@ type ProductPageProps = {
 };
 
 export default function ProductsPage({ params: { id } }: ProductPageProps) {
-  const product = getProduct(id);
+
+  const {product, setProduct} = useGlobalContex();
+
+  useEffect(() => {
+    const getProduct = async () => {
+      const product = await getProductById(id);
+      setProduct(product);
+    }
+    getProduct();
+  },[id, setProduct])
 
   return (
     <div className="flex flex-col md:flex-row items-center max-w-7xl mx-auto gap-8 p-3">
@@ -52,7 +33,7 @@ export default function ProductsPage({ params: { id } }: ProductPageProps) {
           <div className="flex items-end relative h-42 w-32 overflow-hidden rounded-md ">
             <Image
               src={golden}
-              alt={product.description || "Ração"}
+              alt={product.description || "Ração Para Cachorro"}
               className="h-full w-full object-cover object-center"
             />
           </div>

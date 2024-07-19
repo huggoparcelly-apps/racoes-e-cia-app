@@ -8,6 +8,7 @@ import Hydrate from "./components/Hydrate";
 import Navbar from "./components/Navbar";
 import { GlobalContextProvider } from "./Context/products";
 import "./globals.css";
+import BackHome from "./components/BackHome";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -27,6 +28,7 @@ export default function RootLayout({
         <body className={clsx(inter.className, "bg-slate-200")}>
           <Hydrate>
             <Navbar />
+            <BackHome />
             <main className="h-screen pt-32">
               <GlobalContextProvider>
                 {children}
