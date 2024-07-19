@@ -51,15 +51,13 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
   );
 };
 
-// export const useAuth = (): AuthContextProps => {
-//   const context = useContext(AuthContext);
-//   if (context === undefined) {
-//     throw new Error("useAuth must be used within an AuthProvider");
-//   }
-//   return context;
-// };
-
-export const useAuthContext = () => useContext(AuthContext);
+export const useAuthContext = (): AuthContextProps => {
+  const context = useContext(AuthContext);
+  if (context === undefined) {
+    throw new Error("useAuth must be used within an AuthProvider");
+  }
+  return context;
+};
 
 const fakeAuthApi = async (): Promise<UserType> => {
   return {
