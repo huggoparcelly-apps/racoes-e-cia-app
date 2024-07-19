@@ -1,7 +1,7 @@
 "use client";
 
-import { ProductType } from "../types/ProductType";
-import { useCartStore } from "../utils/store";
+import { ProductType } from "../../types/ProductType";
+import { useCartStore } from "../../utils/store";
 
 export default function AddCart({ product }: { product: ProductType }) {
   const { addProduct, removeProduct } = useCartStore();

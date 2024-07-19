@@ -1,7 +1,7 @@
 import Image from "next/image";
 import golden from "/public/racao-golden.webp";
 import premier from "/public/racao-premier.webp";
-import AddCart from "./AddCart";
+import AddCart from "./buttons/AddCart";
 import { ProductType } from "../types/ProductType";
 import Link from "next/link";
 

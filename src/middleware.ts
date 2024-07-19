@@ -5,7 +5,7 @@ const PUBLIC_ROUTES = [
   '/sign-up(.*)', 
   '/', 
   '/products(.*)',
-  '/admin'
+  '/admin(.*)'
 ]
 
 const isPublicRoute = createRouteMatcher(PUBLIC_ROUTES);

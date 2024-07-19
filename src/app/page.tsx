@@ -5,11 +5,11 @@ import { useEffect, useState } from "react";
 import ProductCard from "./components/ProductCard";
 import SearchBar from "./components/SearchBar";
 
-import { useGlobalContex } from "./Context/products";
+import { useProductContext } from "./Context/ProductsContext";
 import { ProductType } from "./types/ProductType";
 
 export default function Home() {
-  const {setAllProducts, allProducts } = useGlobalContex();
+  const {setAllProducts, allProducts } = useProductContext();
   
   useEffect(() => {
     const getProducts = async () => {

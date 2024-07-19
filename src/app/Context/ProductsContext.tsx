@@ -1,6 +1,6 @@
 'use client';
 
-import { createContext, Dispatch, SetStateAction, useContext, useState } from "react";
+import { createContext, Dispatch, ReactNode, SetStateAction, useContext, useState } from "react";
 import { ProductType } from "../types/ProductType";
 
 interface ContextProps {
@@ -18,22 +18,26 @@ const defaultProduct: ProductType = {
   description: ''
 }
 
-const GlobalContext = createContext<ContextProps>({
+const ProductContext = createContext<ContextProps>({
   allProducts: [],
   setAllProducts: (): ProductType[] => [],
   product: defaultProduct,
   setProduct: () => defaultProduct
 });
 
-export const GlobalContextProvider = ({ children }) => {
+interface ProductsProviderProps {
+  children: ReactNode;
+}
+
+export const ProductsProvider = ({ children }: ProductsProviderProps) => {
   const [allProducts, setAllProducts] = useState<[] | ProductType[]>([]);
   const [product, setProduct] = useState<ProductType>(defaultProduct)
 
   return (
-    <GlobalContext.Provider value= {{ allProducts, setAllProducts, product, setProduct }}>
+    <ProductContext.Provider value= {{ allProducts, setAllProducts, product, setProduct }}>
       {children} 
-    </GlobalContext.Provider>
+    </ProductContext.Provider>
   )
 }
 
-export const useGlobalContex = () => useContext(GlobalContext);
+export const useProductContext = () => useContext(ProductContext);

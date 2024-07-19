@@ -5,7 +5,8 @@ export type UserType = {
   id: number;
   name: string;
   fone: string;
-  clerkId: string;
-  orders?: OrderType[]; // Relacionamento de um para muitos
-  addresses?: AddressType[]; // Relacionamento de um para muitos
+  clerkId?: string;
+  orders?: OrderType[];
+  addresses?: AddressType[]; 
+  role: string;
 }
