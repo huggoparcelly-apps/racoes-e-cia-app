@@ -11,7 +11,7 @@ type ProductProps = {
 
 export default function ProductCard({ product }: ProductProps) {
   return (
-    <div className="ml-4 flex flex-1 justify-between">
+    <div className="ml-4 flex flex-1 justify-between shadow-lg p-2 rounded-lg">
       <div className="flex flex-col text-base font-medium text-gray-900 ">
         <Link href={`/products/${product.id}`}>
           <h3>
