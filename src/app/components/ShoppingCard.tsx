@@ -1,6 +1,6 @@
 export default function ShoppingCard() {
   return (
-    <div className="bg-yellow-500 text-black p-4 rounded-lg shadow-lg w-full">
+    <div className="bg-yellow-500 text-black p-4 rounded-lg shadow-lg w-full my-4">
       <div className="flex justify-between">
         <span>Pedido N. 001</span>
         <span>01/12/2024</span>
@@ -11,7 +11,7 @@ export default function ShoppingCard() {
         <span className="font-bold">Qnt. 10</span>
       </div>
 
-      <div className="mt-2">
+      <div className="mt-2 text-sm">
         <span>R. José Maria</span>
         <div>Bairro</div>
         <div>Complemento</div>
