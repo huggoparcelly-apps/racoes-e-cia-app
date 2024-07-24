@@ -12,8 +12,20 @@ export const getAllProducts = async () => {
     });
 
     return data;
-  } catch (error) {
-    console.log(error);
+  } catch (error: any) {
+    
+    if (axios.isAxiosError(error)) {
+      
+      console.error(`Erro de rede: ${error.message}`);
+      console.error(`Status: ${error.response?.statusText}`);
+      console.error(`Dados de erro: ${JSON.stringify(error.response?.data)}`);
+    } else {
+      
+      console.error(`Erro inesperado: ${error.message}`);
+    }
+
+    throw new Error('Falha ao buscar produtos. Por favor, tente novamente mais tarde.');
+
   }
 }
 
@@ -26,8 +38,19 @@ export const getProductById = async (id: number) => {
     });
 
     return data;
-  } catch (error) {
-    console.log(error);
+  } catch (error: any) {
     
+    if (axios.isAxiosError(error)) {
+      
+      console.error(`Erro de rede: ${error.message}`);
+      console.error(`Status: ${error.response?.statusText}`);
+      console.error(`Dados de erro: ${JSON.stringify(error.response?.data)}`);
+    } else {
+      
+      console.error(`Erro inesperado: ${error.message}`);
+    }
+
+    throw new Error('Falha ao buscar o produto. Por favor, tente novamente mais tarde.');
+
   }
 }

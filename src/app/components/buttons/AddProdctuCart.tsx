@@ -1,8 +1,8 @@
 "use client";
 
 import Link from "next/link";
-import { ProductType } from "../types/ProductType";
-import { useCartStore } from "../utils/store";
+import { ProductType } from "../../types/ProductType";
+import { useCartStore } from "../../utils/store";
 
 export default function AddProductCart({ product }: { product: ProductType }) {
   const { addProduct } = useCartStore();

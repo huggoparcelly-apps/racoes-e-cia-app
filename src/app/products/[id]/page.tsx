@@ -1,7 +1,7 @@
 'use client'
 
-import AddProductCart from "@/app/components/AddProdctuCart";
-import { useGlobalContex } from "@/app/Context/products";
+import AddProductCart from "@/app/components/buttons/AddProdctuCart";
+import { useProductContext } from "@/app/Context/ProductsContext";
 import { getProductById } from "@/services/apis/getProducts";
 import Image from "next/image";
 import { useEffect } from "react";
@@ -15,7 +15,7 @@ type ProductPageProps = {
 
 export default function ProductsPage({ params: { id } }: ProductPageProps) {
 
-  const {product, setProduct} = useGlobalContex();
+  const {product, setProduct} = useProductContext();
 
   useEffect(() => {
     const getProduct = async () => {
