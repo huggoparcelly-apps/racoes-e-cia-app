@@ -4,8 +4,11 @@ import { ProductType } from "../types/ProductType";
 
 type CartState = {
   cart: ProductType[];
+
   addProduct: (product: ProductType) => void;
   removeProduct: (product: ProductType) => void;
+  removeItem: (product: ProductType) => void;
+  removeAllItens: () => void;
 };
 
 export const useCartStore = create<CartState>()(
@@ -44,6 +47,15 @@ export const useCartStore = create<CartState>()(
             const filteredCart = state.cart.filter((p) => p.id !== item.id);
             return { cart: filteredCart };
           }
+        }),
+      removeItem: (item) =>
+        set((state) => {
+          const filteredCart = state.cart.filter((p) => p.id !== item.id);
+          return { cart: filteredCart };
+        }),
+      removeAllItens: () =>
+        set(() => {
+          return { cart: [] };
         }),
     }),
     { name: "cart-storage" }
