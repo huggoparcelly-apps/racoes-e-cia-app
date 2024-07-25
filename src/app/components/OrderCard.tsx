@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-export default function ShoppingCard() {
+export default function OrderCard() {
   return (
     <div className="bg-yellow-500 text-black p-4 rounded-lg shadow-lg w-full my-4">
       <Link href={"/shoppings/1"}>
@@ -21,7 +21,7 @@ export default function ShoppingCard() {
         </div>
       </Link>
       <div className="mt-2 flex justify-between">
-        <button className="bg-green-700 text-white py-1 px-4 rounded-full">
+        <button className="bg-teal-600  text-white py-1 px-4 rounded-full">
           Repetir
         </button>
         <span>Status - Entregue</span>

@@ -1,10 +1,8 @@
-type ShoppingPageProps = {
+type OrderPageProps = {
   params: {
     id: number;
   };
 };
-
-import React from "react";
 
 type OrderItem = {
   name: string;
@@ -12,7 +10,7 @@ type OrderItem = {
   price: number;
 };
 
-export default function ShoppingDetail({ params: { id } }: ShoppingPageProps) {
+export default function OrderDetailPage({ params: { id } }: OrderPageProps) {
   const orderNumber = id;
   const orderDate = "01/12/2024";
 

@@ -1,11 +1,11 @@
 
 import Link from "next/link";
 import { IoGiftSharp } from "react-icons/io5";
-export default function ShoppingIcon() {
+export default function OrdersIcon() {
   return (
     <>
       <Link
-        href='/shoppings'
+        href='/orders'
         className="flex items-center cursor-pointer relative"
       >
         <IoGiftSharp className="size-7"/>

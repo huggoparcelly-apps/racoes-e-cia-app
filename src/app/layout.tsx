@@ -1,3 +1,4 @@
+
 import { ptBR } from "@clerk/localizations";
 import { ClerkProvider } from "@clerk/nextjs";
 import clsx from "clsx";
