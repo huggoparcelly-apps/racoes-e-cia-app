@@ -1,9 +1,11 @@
 "use client";
 
 import AddressCard from "@/app/components/AddressCard";
-import React, { useState } from "react";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
 
 export default function AddressPage() {
+  const router = useRouter();
   const [selectedAddress, setSelectedAddress] = useState<number>(0);
 
   const addresses = [
@@ -16,13 +18,13 @@ export default function AddressPage() {
   };
 
   const handleEdit = (index: number) => {
-    // Lógica para editar o endereço
-    console.log(`Editando endereço ${index}`);
+    const address = addresses[index];
+    const queryString = new URLSearchParams(address).toString();
+    router.push(`/address/form?${queryString}`);
   };
 
   const handleAddNew = () => {
-    // Lógica para adicionar novo endereço
-    console.log("Adicionando novo endereço");
+    router.push('/address/form');
   };
 
   return (

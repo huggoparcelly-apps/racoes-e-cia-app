@@ -4,7 +4,7 @@ import { ClerkProvider } from "@clerk/nextjs";
 import clsx from "clsx";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
-import BackHome from "./components/BackHome";
+import BackButton from "./components/buttons/BackButton";
 import Footer from "./components/Footer";
 import Hydrate from "./components/Hydrate";
 import Navbar from "./components/Navbar";
@@ -30,7 +30,7 @@ export default function RootLayout({
           <Hydrate>
           <div className="flex flex-col h-screen">
             <Navbar />
-            <BackHome />
+            <BackButton />
             <main className="flex-grow overflow-y-auto pt-32">
               <ProductsProvider>{children}</ProductsProvider>
             </main>
