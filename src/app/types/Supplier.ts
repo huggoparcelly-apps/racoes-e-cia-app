@@ -1,4 +1,4 @@
-import { ProductType } from "./ProductType";
+import { Product } from "./Product";
 
 export type Supplier = {
   id: string;
@@ -6,5 +6,5 @@ export type Supplier = {
   cnpj: string; 
   fone: string;
   email: string;
-  products?: ProductType[]; // Relacionamento de um para muitos
+  products?: Product[]; // Relacionamento de um para muitos
 }

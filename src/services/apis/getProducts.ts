@@ -1,3 +1,4 @@
+import { Product } from '@/app/types/Product';
 import axios from 'axios';
 
 const BASE_URL = 'http://localhost:3001/products';

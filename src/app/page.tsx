@@ -6,7 +6,7 @@ import ProductCard from "./components/ProductCard";
 import SearchBar from "./components/SearchBar";
 
 import { useProductContext } from "./Context/ProductsContext";
-import { ProductType } from "./types/ProductType";
+import { Product } from "./types/Product";
 
 export default function Home() {
   const {setAllProducts, allProducts } = useProductContext();
@@ -31,7 +31,7 @@ export default function Home() {
         <div className="mt-8">
           <div className="flow-root">
             <ul role="list" className="my-6 divide-y divide-gray-200">
-              {filteredProducts.map((product: ProductType) => (
+              {filteredProducts.map((product: Product) => (
                 <li key={product.id} className="flex py-6">
                   <ProductCard product={product} />
                 </li>

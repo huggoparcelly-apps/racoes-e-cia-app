@@ -1,9 +1,13 @@
 "use client";
 
-import { ProductType } from "../../types/ProductType";
+import { Product } from "../../types/Product";
 import { useCartStore } from "../../utils/store";
 
-export default function AddCart({ product }: { product: ProductType }) {
+type ProductProps = {
+  product: Product;
+};
+
+export default function AddCart({ product }: ProductProps) {
   const { addProduct, removeProduct } = useCartStore();
 
   return (

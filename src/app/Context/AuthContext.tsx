@@ -9,17 +9,17 @@ import {
     useEffect,
     useState,
 } from "react";
-import { UserType } from "../types/UserType";
+import { User } from "../types/User";
 
 interface AuthContextProps {
-  user: UserType | null;
-  setUser: Dispatch<SetStateAction<UserType>>;
+  user: User | null;
+  setUser: Dispatch<SetStateAction<User>>;
 }
 
-const defaultUser: UserType = {
+const defaultUser: User = {
     id: 0,
     name: '',
-    fone: '',
+    phone: '',
     role: ''
 };
 
@@ -33,7 +33,7 @@ interface AuthProviderProps {
 }
 
 export const AuthProvider = ({ children }: AuthProviderProps) => {
-  const [user, setUser] = useState<UserType>(defaultUser);
+  const [user, setUser] = useState<User>(defaultUser);
 
   useEffect(() => {
     const fetchUser = async () => {
@@ -59,11 +59,11 @@ export const useAuthContext = (): AuthContextProps => {
   return context;
 };
 
-const fakeAuthApi = async (): Promise<UserType> => {
+const fakeAuthApi = async (): Promise<User> => {
   return {
     id: 1,
     name: "Admin User",
-    fone: "123",
+    phone: "123",
     role: "admin", // ou 'user'
   };
 };

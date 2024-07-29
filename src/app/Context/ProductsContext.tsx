@@ -1,16 +1,16 @@
 'use client';
 
 import { createContext, Dispatch, ReactNode, SetStateAction, useContext, useState } from "react";
-import { ProductType } from "../types/ProductType";
+import { Product } from "../types/Product";
 
 interface ContextProps {
-  allProducts: ProductType[],
-  setAllProducts: Dispatch<SetStateAction<ProductType[]>>,
-  product: ProductType,
-  setProduct: Dispatch<SetStateAction<ProductType>>
+  allProducts: Product[],
+  setAllProducts: Dispatch<SetStateAction<Product[]>>,
+  product: Product,
+  setProduct: Dispatch<SetStateAction<Product>>
 }
 
-const defaultProduct: ProductType = {
+const defaultProduct: Product = {
   id: 0,
   name: '',
   price: 0,
@@ -20,7 +20,7 @@ const defaultProduct: ProductType = {
 
 const ProductContext = createContext<ContextProps>({
   allProducts: [],
-  setAllProducts: (): ProductType[] => [],
+  setAllProducts: (): Product[] => [],
   product: defaultProduct,
   setProduct: () => defaultProduct
 });
@@ -30,8 +30,8 @@ interface ProductsProviderProps {
 }
 
 export const ProductsProvider = ({ children }: ProductsProviderProps) => {
-  const [allProducts, setAllProducts] = useState<[] | ProductType[]>([]);
-  const [product, setProduct] = useState<ProductType>(defaultProduct)
+  const [allProducts, setAllProducts] = useState<[] | Product[]>([]);
+  const [product, setProduct] = useState<Product>(defaultProduct)
 
   return (
     <ProductContext.Provider value= {{ allProducts, setAllProducts, product, setProduct }}>

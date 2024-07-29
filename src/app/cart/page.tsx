@@ -8,8 +8,8 @@ export default function CartPage() {
   const { cart, removeAllItens } = useCartStore();
 
   const total = cart.reduce(
-    (sum, item) => sum + item.price * item.quantity, 0);
-
+    (sum, item) => sum + item.product.price * item.quantity, 0);
+  
   return (
     <div className="pb-16 max-w-md mx-auto rounded-xl">
       
@@ -21,7 +21,7 @@ export default function CartPage() {
       </div>
 
       {cart.map((item) => (
-        <ItemCard key={item.id} item={item} />
+        <ItemCard key={item.product.id} item={item} />
       ))}
 
       <div className="flex justify-center w-full">

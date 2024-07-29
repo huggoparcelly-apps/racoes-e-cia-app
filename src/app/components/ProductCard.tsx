@@ -2,11 +2,11 @@ import Image from "next/image";
 import golden from "/public/racao-golden.webp";
 import premier from "/public/racao-premier.webp";
 import AddCart from "./buttons/AddCart";
-import { ProductType } from "../types/ProductType";
+import { Product } from "../types/Product";
 import Link from "next/link";
 
 type ProductProps = {
-  product: ProductType;
+  product: Product;
 };
 
 export default function ProductCard({ product }: ProductProps) {
