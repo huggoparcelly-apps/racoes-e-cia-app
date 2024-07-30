@@ -1,3 +1,5 @@
+import OrderDetailCard from "@/app/components/OrderDetailCard";
+
 type OrderPageProps = {
   params: {
     id: number;
@@ -28,7 +30,7 @@ export default function OrderDetailPage({ params: { id } }: OrderPageProps) {
   );
 
   return (
-    <div className="max-w-md mx-auto bg-white px-4 pb-16 rounded-lg flow-root">
+    <div className="max-w-md mx-auto px-4 pb-16 rounded-lg flow-root">
       
       <div className="flex justify-between mb-4">
         <h2 className="text-xl font-bold">Pedido N. {orderNumber}</h2>
@@ -36,24 +38,7 @@ export default function OrderDetailPage({ params: { id } }: OrderPageProps) {
       </div>
 
       {items.map((item, index) => (
-        <div key={index} className="mb-4 bg-gray-200 p-4 rounded-lg shadow-lg">
-          <div className="flex justify-between">
-            <p>{item.name}</p>
-            
-          </div>
-          <div className="flex justify-between text-sm ">
-            <p>Qnt.</p>
-            <p>{item.quantity}</p>
-          </div>
-          <div className="flex justify-between text-sm text-gray-500">
-            <p>unit</p>
-            <p className="font-semibold">R$ {item.price.toFixed(2)}</p>
-          </div>
-          <div className="flex justify-between text-sm">
-            <p></p>
-            <p>Total R$ {(item.quantity * item.price).toFixed(2)}</p>
-          </div>
-        </div>
+        <OrderDetailCard key={index} item={item} />
       ))}
 
       <div className="flex justify-between font-bold text-lg mt-4">
@@ -61,7 +46,10 @@ export default function OrderDetailPage({ params: { id } }: OrderPageProps) {
         <p>R$ {total.toFixed(2)}</p>
       </div>
 
-      <button className="mt-6 w-full bg-green-600 text-white py-2 rounded-lg hover:bg-green-700">
+      <button 
+        className="my-4 w-full bg-green-600 text-white py-2 rounded-lg hover:bg-green-700"
+        
+      >
         Repetir Pedido
       </button>
     </div>
