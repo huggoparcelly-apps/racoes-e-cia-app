@@ -15,7 +15,8 @@ const defaultProduct: Product = {
   name: '',
   price: 0,
   image: '',
-  description: ''
+  description: '',
+  quantity: 0
 }
 
 const ProductContext = createContext<ContextProps>({

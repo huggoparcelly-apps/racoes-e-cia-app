@@ -2,6 +2,7 @@ import { create } from "zustand";
 import { persist } from "zustand/middleware";
 import { Product } from "../types/Product";
 import { Item } from "../types/Item";
+import { Address } from "../types/Address";
 
 type CartState = {
   cart: Item[];
@@ -10,6 +11,9 @@ type CartState = {
   removeProduct: (product: Product) => void;
   removeItem: (item: Item) => void;
   removeAllItens: () => void;
+
+  address: Address | null;
+  setAddress: (address: Address) => void;
 };
 
 export const useCartStore = create<CartState>()(
@@ -69,8 +73,10 @@ export const useCartStore = create<CartState>()(
         set(() => {
           return { cart: [] };
         }),
+      address: null,
+      setAddress: (address) => set({ address }),
+
     }),
-    
     { name: "cart-storage" }
   )
 );

@@ -5,5 +5,5 @@ export type Product = {
   price: number;
   quantity: number | 0;
   image: string;
-  supplierId: number;
+  supplierId?: number;
 }

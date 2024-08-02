@@ -1,32 +1,118 @@
 "use client";
 
-import { IoLocationOutline, IoLocationSharp } from "react-icons/io5";
+import { useEffect, useState } from "react";
+import { Address } from "../types/Address";
+import { useCartStore } from "../utils/store";
 
-type AddressItemProps = {
-  address: string;
-  isSelected: boolean;
-  onSelect: () => void;
-  onEdit: () => void;
-};
+export default function AddressCard() {
+  const { setAddress } = useCartStore();
+  const defaultAddress = {
+    street: "",
+    number: "",
+    neighborhood: "",
+    complement: "",
+  };
 
-export default function AddressCard({ address, isSelected, onSelect, onEdit }: AddressItemProps) {
+  const [formState, setFormState] = useState<Address>(defaultAddress);
+  const [isSaveDisabled, setIsSaveDisabled] = useState(true);
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setFormState({
+      ...formState,
+      [name]: name === "number" ? parseInt(value) : value,
+    });
+  };
+
+  const handleSave = (e: React.FormEvent) => {
+    e.preventDefault();
+    setAddress(formState);
+    setIsSaveDisabled(true);
+  };
+
+  const handleClean = () => {
+    setFormState(defaultAddress);
+  };
+
+  useEffect(() => {
+    const { street, number, neighborhood } = formState;
+    if (street && number && neighborhood) {
+      setIsSaveDisabled(false);
+    } else {
+      setIsSaveDisabled(true);
+    }
+  }, [formState]);
+
   return (
-    <div className="flex items-center justify-between p-4 border-b border-gray-200 shadow-sm">
-      <div className="flex items-center">
-        <button
-          onClick={onSelect}
-          className="flex justify-center items-center">
-          {isSelected ? <IoLocationSharp className="size-6" /> : <IoLocationOutline className="size-6"/>}
+    <form>
+      <div className="p-6 text-gray-700 rounded-lg">
 
-        </button>
-        <div className="ml-4 text-sm">
-          <p className="font-semibold">{address}</p>
-          <p className="text-gray-500">Bairro São Tomé - Complemento</p>
+        <div className="mb-4">
+          <label className="block">Rua</label>
+          <input
+            type="text"
+            name="street"
+            value={formState.street}
+            onChange={handleChange}
+            required
+            className="mt-1 p-2 border rounded-lg w-full"
+          />
+        </div>
+
+        <div className="mb-4">
+          <label className="block">Bairro</label>
+          <input
+            type="text"
+            name="neighborhood"
+            value={formState.neighborhood}
+            onChange={handleChange}
+            required
+            className="mt-1 p-2 border rounded-lg w-full"
+          />
+        </div>
+
+        <div className="mb-4">
+          <label className="block">Num</label>
+          <input
+            type="number"
+            name="number"
+            value={formState.number}
+            onChange={handleChange}
+            required
+            className="mt-1 p-2 border rounded-lg w-full"
+          />
+        </div>
+
+        <div className="mb-4">
+          <label className="block">Complemento</label>
+          <input
+            type="text"
+            name="complement"
+            value={formState.complement}
+            onChange={handleChange}
+            className="mt-1 p-2 border rounded-lg w-full"
+          />
+        </div>
+
+        <div className="flex justify-center gap-4">
+          <button
+            type="submit"
+            onClick={handleSave}
+            className={`${
+              isSaveDisabled ? "bg-green-300" : "bg-green-500"
+            }  py-2 px-4 rounded`}
+            disabled={isSaveDisabled}
+          >
+            Salvar
+          </button>
+          <button
+            onClick={handleClean}
+            className="bg-red-500  py-2 px-4 rounded hover:bg-red-500"
+          >
+            Limpar
+          </button>
         </div>
       </div>
-      <button onClick={onEdit} className="text-blue-500 hover:underline">
-        Editar
-      </button>
-    </div>
-  )
+    </form>
+  );
 }

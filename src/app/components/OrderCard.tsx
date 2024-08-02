@@ -2,7 +2,12 @@ import Link from "next/link";
 import { Order } from "../types/Order";
 
 type OrderProps = {
-  order: Order;
+  order: {
+    id: number;
+    orderDate: string;
+    totalAmount: number;
+    status: string;
+  };
 }
 
 export default function OrderCard({order}: OrderProps) {

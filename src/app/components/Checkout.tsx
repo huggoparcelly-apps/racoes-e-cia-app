@@ -1,9 +1,13 @@
 import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
+import { useCartStore } from '../utils/store';
 
-const Checkout: React.FC = () => {
-  const [paymentMethod, setPaymentMethod] = useState<string>('pix-cartao');
+export default function Checkout() {
+
+  const [paymentMethod, setPaymentMethod] = useState<string>('pix');
   const router = useRouter();
+
+  const {cart, address} = useCartStore();
 
   const handlePaymentMethodChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setPaymentMethod(event.target.value);
@@ -18,28 +22,32 @@ const Checkout: React.FC = () => {
     }
   };
 
+  const subTotal = cart.reduce((sum, item) => sum + item.product.price * item.quantity, 0);
+  const rateTaxe = 7.00;
+  const total = subTotal + rateTaxe;
+
   return (
     <div className="max-w-md mx-auto p-6 rounded-lg ">
       <h2 className="text-xl font-bold mb-4">Resumo do pedido</h2>
       <div className="mb-2">
         <div className="flex justify-between">
           <span>Subtotal</span>
-          <span>R$ 93,99</span>
+          <span>R$ {subTotal.toFixed(2).replace(".", ",")}</span>
         </div>
         <div className="flex justify-between">
           <span>Taxa de Entrega</span>
-          <span>R$ 7,00</span>
+          <span>R$ {rateTaxe.toFixed(2).replace(".", ",")}</span>
         </div>
         <div className="flex justify-between font-bold mt-2">
           <span>Total</span>
-          <span>R$ 100,99</span>
+          <span>R$ {total.toFixed(2).replace(".", ",")}</span>
         </div>
       </div>
       
       <h2 className="text-xl font-bold mt-6 mb-2">Endereço de entrega</h2>
       <div className="mb-4">
-        <p>R. Pinheiros Celulares, 255</p>
-        <p>Bairro São Tomé - Complemento</p>
+        <p>{address?.street} - {address?.number}</p>
+        <p>{address?.neighborhood} - {address?.complement}</p>
       </div>
 
       <h2 className="text-xl font-bold mt-6 mb-2">Selecionar forma de pagamento</h2>
@@ -47,14 +55,14 @@ const Checkout: React.FC = () => {
         <div className="flex items-center mb-2">
           <input 
             type="radio" 
-            id="pix-cartao" 
+            id="pix" 
             name="payment" 
-            value="pix-cartao" 
+            value="pix" 
             className="mr-2" 
-            checked={paymentMethod === 'pix-cartao'}
+            checked={paymentMethod === 'pix'}
             onChange={handlePaymentMethodChange}
           />
-          <label htmlFor="pix-cartao">PIX / Cartão</label>
+          <label htmlFor="pix">PIX</label>
         </div>
         <div className="flex items-center">
           <input 
@@ -71,7 +79,7 @@ const Checkout: React.FC = () => {
       </div>
 
       <button 
-        className="w-full bg-yellow-500 text-white py-2 rounded-lg shadow-md hover:bg-yellow-600 focus:outline-none focus:ring-2 focus:ring-yellow-400"
+        className="w-full bg-yellow-500 text-white py-2 rounded-lg shadow-md"
         onClick={handleConfirmOrder}
       >
         Confirmar pedido
@@ -79,5 +87,3 @@ const Checkout: React.FC = () => {
     </div>
   );
 };
-
-export default Checkout;

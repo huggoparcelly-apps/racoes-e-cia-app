@@ -28,7 +28,7 @@ export default function Footercart() {
       <div className="rounded-lg text-start">
         <p>Total</p>
         <p className="font-bold text-md">
-          R$ {total.toFixed(2)} / {cart.length} Itens
+          R$ {total.toFixed(2).replace("." , ",")} / {cart.length} Itens
         </p>
       </div>
       
