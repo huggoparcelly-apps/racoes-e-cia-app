@@ -1,15 +1,12 @@
+import Badge from "./buttons/Badge";
+
 export default function CategoriesBadges() {
+
+  const labels = ["Cachorro", "Gato", "Pássaro"]
+
   return (
     <div className="flex space-x-2 my-3">
-      <span className="inline-flex items-center justify-center flex-grow rounded-full bg-yellow-900 px-3 py-2 text-xs font-medium text-slate-200 ring-1 ring-inset ring-yellow-600/20">
-        Cachorro
-      </span>
-      <span className="inline-flex items-center justify-center flex-grow rounded-full bg-yellow-900 px-3 py-2 text-xs font-medium text-slate-200 ring-1 ring-inset ring-yellow-600/20">
-        Gato
-      </span>
-      <span className="inline-flex items-center justify-center flex-grow rounded-full bg-yellow-900 px-3 py-2 text-xs font-medium text-slate-200 ring-1 ring-inset ring-yellow-600/20">
-        Pássaro
-      </span>
+      {labels.map((label, index) => <Badge key={index} label={label} />)}
     </div>
   );
 }
