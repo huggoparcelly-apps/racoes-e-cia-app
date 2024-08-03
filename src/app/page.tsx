@@ -2,7 +2,7 @@
 
 import { getAllProducts } from "@/services/apis/getProducts";
 import { useEffect, useState } from "react";
-import ProductCard from "./components/ProductCard";
+import ProductCard from "./components/productCards/ProductCard";
 import SearchBar from "./components/SearchBar";
 
 import { useProductContext } from "./Context/ProductsContext";

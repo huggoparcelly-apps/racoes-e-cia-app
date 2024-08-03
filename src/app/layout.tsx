@@ -4,7 +4,7 @@ import { Inter } from "next/font/google";
 import BackButton from "./components/buttons/BackButton";
 import Footer from "./components/footers/Footer";
 import Hydrate from "./components/Hydrate";
-import Navbar from "./components/Navbar";
+import Navbar from "./components/navbars/Navbar";
 import { ProductsProvider } from "./Context/ProductsContext";
 import "./globals.css";
 

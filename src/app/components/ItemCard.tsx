@@ -11,10 +11,6 @@ export default function ItemCard({ item }: ItemProps) {
 
   const { cart, addProduct, removeProduct, removeItem } = useCartStore();
 
-  // const total = cart.reduce(
-  //   (sum, item) => sum + item.product.price * item.quantity,0);
-  
-
   return (
     <div
       className="flex items-center space-x-4 border-b p-2 shadow-sm"
