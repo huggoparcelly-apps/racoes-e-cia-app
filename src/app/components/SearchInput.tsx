@@ -6,7 +6,7 @@ type SearchInputProps = {
 
 export default function SearchInput({ setSearchTerm }: SearchInputProps) {
   return (
-    <div className="relative block ">
+    <div className="relative block md:flex md:justify-center">
       <input
         className="placeholder:italic placeholder:text-slate-400 block bg-white w-full border 
         border-slate-300 rounded-md py-1 pr-10 pl-3 shadow-sm focus:outline-none 
@@ -17,7 +17,7 @@ export default function SearchInput({ setSearchTerm }: SearchInputProps) {
         name="search"
         onChange={(e) => setSearchTerm(e.target.value)}
       />
-      <IoSearchSharp className="absolute right-3 top-1/2 transform -translate-y-1/2 text-slate-400" />
+      <IoSearchSharp className="absolute md:relative right-3 md:right-5 top-1/2 md:top-4 transform -translate-y-1/2 text-slate-400" />
     </div>
   );
 }
