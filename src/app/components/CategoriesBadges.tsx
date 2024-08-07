@@ -1,12 +1,25 @@
 import Badge from "./buttons/Badge";
 
-export default function CategoriesBadges() {
+type CategoriesProps = {
+  onSelectCategory: (category: string | null) => void;
+  selectedCategory: string | null;
+};
 
-  const labels = ["Cachorro", "Gato", "Pássaro"]
+export default function CategoriesBadges({ onSelectCategory, selectedCategory}: CategoriesProps) {
+  const labels = ["Cachorro", "Gato", "Pássaro"];
 
   return (
     <div className="flex justify-between md:justify-center space-x-2 my-3 ">
-      {labels.map((label, index) => <Badge key={index} label={label} />)}
+      {labels.map((label, index) => (
+        
+        <Badge
+          key={index} 
+          label={label} 
+          isSelected={selectedCategory === label}
+          onClick={() => onSelectCategory(selectedCategory === label ? null : label)} 
+        />
+
+      ))}
     </div>
   );
 }
