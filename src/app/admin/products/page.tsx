@@ -11,6 +11,7 @@ import { useEffect, useState } from "react";
 
 export default function AdminProducts() {
   const {setAllProducts, allProducts } = useProductContext();
+  const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   
   useEffect(() => {
     const getProducts = async () => {
@@ -24,17 +25,24 @@ export default function AdminProducts() {
   
   const filteredProducts = allProducts
   .filter((product: { name: string; }) => product.name.toLowerCase().includes(searchTerm.toLowerCase()));
+  const handleSelectCategory = (category: string | null) => {
+    setSelectedCategory(category);
+  };
+
+  const filteredProductsByCategory = selectedCategory
+    ? filteredProducts.filter(product => product.category === selectedCategory)
+    : filteredProducts;
 
   return (
     <>
     
-    <SearchBar setSearchTerm={setSearchTerm}/>
+    <SearchBar setSearchTerm={setSearchTerm} onSelectCategory={handleSelectCategory} selectedCategory={selectedCategory}/>
     
       <div className="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 md:px-8 ">
         <AddProductAdmin />
           <div className="flow-root">
             <ul role="list" className="my-6 divide-y divide-gray-200">
-              {filteredProducts.map((product: Product) => (
+              {filteredProductsByCategory.map((product: Product) => (
                 <li key={product.id} className="flex py-6">
                   <ProductCardAdmin product={product} />
                 </li>
