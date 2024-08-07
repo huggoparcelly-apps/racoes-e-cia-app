@@ -1,7 +1,9 @@
 "use client";
 
 import { Product } from "@/app/types/Product";
+import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
+import { BsFillImageFill } from "react-icons/bs";
 
 const defaultProduct = {
   name: "",
@@ -14,7 +16,17 @@ const defaultProduct = {
 function NewProduct() {
   const [formState, setFormState] = useState<Product>(defaultProduct);
   const [isSaveDisabled, setIsSaveDisabled] = useState(true);
-  const imageRef = useRef(null);
+  const [image, setImage] = useState<File | null>(null);
+  const [preview, setPreview] = useState<string | null>(null);
+  const imageRef = useRef<HTMLInputElement | null>(null);
+
+  const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      setImage(file);
+      setPreview(URL.createObjectURL(file));
+    }
+  };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -30,10 +42,14 @@ function NewProduct() {
     // save to db
     setIsSaveDisabled(true);
     setFormState(defaultProduct);
+    setImage(null)
+    setPreview(null);
   };
 
   const handleClean = () => {
     setFormState(defaultProduct);
+    setImage(null)
+    setPreview(null);
   };
 
   useEffect(() => {
@@ -95,18 +111,29 @@ function NewProduct() {
           />
         </div>
 
-        <div className="mb-4">
-          <label className="block">Imagem</label>
-          <input
-            type="file"
-            hidden
-            name="image"
-            ref={imageRef}
-            value={formState.complement}
-            onChange={handleChange}
-            className="mt-1 p-2 border rounded-lg w-full"
-          />
-        </div>
+        {preview ? (
+          <div className="flex mt-5 h-20 w-20 relative justify-center">
+            <Image src={preview} alt="select img" layout="fill" objectFit="cover"  />
+          </div>
+        ) : (
+          <div className="mb-4">
+            <label className="block">Adicionar Imagem</label>
+            <input
+              type="file"
+              accept="image/*"
+              name="image"
+              ref={imageRef}
+              onChange={handleImageChange}
+              className="hidden"
+            />
+            <div
+              className="max-w-20 flex justify-center mt-3 cursor-pointer"
+              onClick={() => imageRef.current?.click()}
+            >
+              <BsFillImageFill className="size-12" />
+            </div>
+          </div>
+        )}
 
         <div className="flex justify-center gap-4">
           <button
