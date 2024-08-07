@@ -1,12 +1,13 @@
+import { Address } from "./Address";
 import { Item } from "./Item";
+import { StatusOrder } from "./StatusEnum";
 
 export type Order = {
   id: number;
-  orderDate: Date;
-  userId: number; 
-  addressId: number; 
-  itens: Item[];
+  date: string; 
+  address: Address; 
+  items: Item[];
   totalAmount: number;
-  status: string;
+  status: keyof typeof StatusOrder;
   paymentType: string;
 }
