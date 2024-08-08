@@ -1,10 +1,10 @@
 import clsx from "clsx";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
-import BackButton from "./components/buttons/BackButton";
-import Footer from "./components/footers/Footer";
-import Hydrate from "./components/Hydrate";
-import Navbar from "./components/navbars/Navbar";
+import BackButton from "./Components/buttons/BackButton";
+import Footer from "./Components/footers/Footer";
+import Hydrate from "./Components/Hydrate";
+import Navbar from "./Components/navbars/Navbar";
 import { ProductsProvider } from "./Context/ProductsContext";
 import "./globals.css";
 

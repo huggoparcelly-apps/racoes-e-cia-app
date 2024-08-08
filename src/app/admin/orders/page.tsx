@@ -1,6 +1,6 @@
 "use client";
 
-import OrderManagement from "@/app/components/OrderManagement";
+import OrderManagement from "@/app/Components/OrderManagement";
 import { Order } from "@/app/types/Order";
 import { StatusOrder } from "@/app/types/StatusEnum";
 import { useState } from "react";

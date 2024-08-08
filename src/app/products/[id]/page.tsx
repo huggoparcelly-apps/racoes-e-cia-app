@@ -1,6 +1,6 @@
 'use client'
 
-import AddProductCart from "@/app/components/buttons/AddProdctuCart";
+import AddProductCart from "@/app/Components/buttons/AddProdctuCart";
 import { useProductContext } from "@/app/Context/ProductsContext";
 import { getProductById } from "@/services/apis/getProducts";
 import Image from "next/image";

@@ -1,6 +1,6 @@
 "use client";
 
-import AddressCard from "@/app/components/AddressCard";
+import AddressCard from "@/app/Components/AddressCard";
 
 
 export default function AddressPage() {

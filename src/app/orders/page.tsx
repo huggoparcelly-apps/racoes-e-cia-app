@@ -1,4 +1,4 @@
-import OrderCard from "../components/OrderCard";
+import OrderCard from "../Components/OrderCard";
 
 export default function OrdersPage() {
 

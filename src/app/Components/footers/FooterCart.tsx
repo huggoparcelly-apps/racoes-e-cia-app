@@ -1,7 +1,7 @@
 "use client";
 
 import { usePathname, useRouter } from "next/navigation";
-import { useCartStore } from "../../utils/store";
+import { useCartStore } from "../../utils/cartStore";
 
 type FooterCartProps = {
   pathname: string;

@@ -3,7 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 
 import logo from "/public/logo.png";
 import NavbarAdmin from "./NavbarAdmin";
@@ -11,7 +11,7 @@ import NavbarAdmin from "./NavbarAdmin";
 function Navbar() {
 
   const pathname = usePathname();
-
+  const router = useRouter();
 
   return (
     <nav className="fixed top-0 w-full flex item-center py-2 px-8 justify-between z-50 bg-yellow-300 text-slate-200">
@@ -26,7 +26,10 @@ function Navbar() {
 
       <div className="flex items-center gap-8 text-sm">
         <div>
-          <button className="border rounded-md px-3 py-2 bg-yellow-900">
+          <button 
+            className="border rounded-md px-3 py-2 bg-yellow-900"
+            onClick={() => router.push("/auth")}
+          >
             Login
           </button>
         </div>

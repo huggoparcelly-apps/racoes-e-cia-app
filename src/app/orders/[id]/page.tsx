@@ -1,4 +1,4 @@
-import OrderDetailCard from "@/app/components/OrderDetailCard";
+import OrderDetailCard from "@/app/Components/OrderDetailCard";
 
 type OrderPageProps = {
   params: {

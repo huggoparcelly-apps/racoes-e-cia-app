@@ -1,7 +1,7 @@
 "use client";
 import Link from "next/link";
-import ItemCard from "../components/ItemCard";
-import { useCartStore } from "../utils/store";
+import ItemCard from "../Components/ItemCard";
+import { useCartStore } from "../utils/cartStore";
 
 export default function CartPage() {
 

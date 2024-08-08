@@ -1,7 +1,7 @@
 "use client";
 
 import { Product } from "../../types/Product";
-import { useCartStore } from "../../utils/store";
+import { useCartStore } from "../../utils/cartStore";
 
 type ProductProps = {
   product: Product;
