@@ -1,5 +1,6 @@
 import useAuthStore from "@/app/utils/authStore";
 import { auth } from "@/services/firebase/firebaseConfig";
+import setCookie from "@/services/helpers/setCookie";
 import { useSignInWithGoogle } from "react-firebase-hooks/auth";
 
 const useGoogleAuth = () => {
@@ -17,6 +18,9 @@ const useGoogleAuth = () => {
       }
 
       let existsUser = true;
+      const token = await newUser?.user.getIdToken();
+      setCookie("authToken", `${token}`, 1);
+
       // await axios.get(`${BASE_URL}/users_id/${newUser.user.uid}`)
       //   .then(response => {
       //     localStorage.setItem("user-info", JSON.stringify(response.data.user));
