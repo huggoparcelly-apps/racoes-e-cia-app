@@ -1,6 +1,6 @@
 'use client'
 
-import { getAllProducts } from "@/services/apis/getProducts";
+import { getAllProducts } from "@/services/apis/apiProducts";
 import { useEffect, useState } from "react";
 import ProductCard from "./Components/productCards/ProductCard";
 import SearchBar from "./Components/SearchBar";

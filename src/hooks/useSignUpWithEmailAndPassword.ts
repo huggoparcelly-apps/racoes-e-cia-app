@@ -1,4 +1,4 @@
-import useAuthStore from "@/app/utils/authStore";
+import useAuthStore from "@/app/stores/authStore";
 import { auth } from "@/services/firebase/firebaseConfig";
 import { useCreateUserWithEmailAndPassword } from "react-firebase-hooks/auth";
 

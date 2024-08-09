@@ -2,7 +2,7 @@
 
 import AddProductCart from "@/app/Components/buttons/AddProdctuCart";
 import { useProductContext } from "@/app/Context/ProductsContext";
-import { getProductById } from "@/services/apis/getProducts";
+import { getProductById } from "@/services/apis/apiProducts";
 import Image from "next/image";
 import { useEffect } from "react";
 import golden from "/public/racao-golden.webp";

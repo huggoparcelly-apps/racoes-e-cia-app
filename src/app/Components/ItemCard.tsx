@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { Item } from "../types/Item";
-import { useCartStore } from "../utils/cartStore";
+import { useCartStore } from "../stores/cartStore";
 import golden from "/public/racao-golden.webp";
 
 type ItemProps = {

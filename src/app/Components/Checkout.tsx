@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { useCartStore } from '../utils/cartStore';
+import { useCartStore } from '../stores/cartStore';
 
 export default function Checkout() {
 

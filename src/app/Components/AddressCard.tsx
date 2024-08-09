@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { Address } from "../types/Address";
-import { useCartStore } from "../utils/cartStore";
+import { useCartStore } from "../stores/cartStore";
 
 export default function AddressCard() {
   const { setAddress } = useCartStore();

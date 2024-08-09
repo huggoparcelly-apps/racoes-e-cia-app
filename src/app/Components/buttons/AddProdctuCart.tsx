@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { Product } from "../../types/Product";
-import { useCartStore } from "../../utils/cartStore";
+import { useCartStore } from "../../stores/cartStore";
 
 export default function AddProductCart({ product }: { product: Product }) {
   const { addProduct } = useCartStore();

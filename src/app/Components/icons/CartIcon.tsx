@@ -1,7 +1,7 @@
 "use client";
 
 import { IoCartSharp } from "react-icons/io5";
-import { useCartStore } from "../../utils/cartStore";
+import { useCartStore } from "../../stores/cartStore";
 import Link from "next/link";
 
 export default function CartIcon() {

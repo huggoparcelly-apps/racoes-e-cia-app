@@ -5,7 +5,7 @@ import ProductCardAdmin from "@/app/Components/productCards/ProductCardAdmin";
 import SearchBar from "@/app/Components/SearchBar";
 import { useProductContext } from "@/app/Context/ProductsContext";
 import { Product } from "@/app/types/Product";
-import { getAllProducts } from "@/services/apis/getProducts";
+import { getAllProducts } from "@/services/apis/apiProducts";
 import { useEffect, useState } from "react";
 
 

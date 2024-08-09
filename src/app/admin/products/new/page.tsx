@@ -1,6 +1,8 @@
 "use client";
 
 import { Product } from "@/app/types/Product";
+import useCreateNewProduct from "@/hooks/useCreateNewProduct";
+import usePreviewImg from "@/hooks/usepreviewImg";
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 import { BsFillImageFill } from "react-icons/bs";
@@ -8,58 +10,52 @@ import { BsFillImageFill } from "react-icons/bs";
 const defaultProduct = {
   name: "",
   description: "",
+  category: "",
   price: 0,
   quantity: 0,
   image: "",
 };
 
 function NewProduct() {
-  const [formState, setFormState] = useState<Product>(defaultProduct);
+  const [product, setProduct] = useState<Product>(defaultProduct);
   const [isSaveDisabled, setIsSaveDisabled] = useState(true);
-  const [image, setImage] = useState<File | null>(null);
-  const [preview, setPreview] = useState<string | null>(null);
   const imageRef = useRef<HTMLInputElement | null>(null);
 
-  const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (file) {
-      setImage(file);
-      setPreview(URL.createObjectURL(file));
-    }
-  };
+  const { handleCreateProduct } = useCreateNewProduct();
+  const { selectedFile, handleImageChange, setSelectedFile } = usePreviewImg();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
-    setFormState({
-      ...formState,
-      [name]: name === "price" ? parseFloat(value) : value,
-      [name]: name === "quantity" ? parseInt(value) : value,
+    setProduct({
+      ...product,
+      [name]: name === "price" ? parseFloat(value) : name === "quantity" ? parseInt(value) : value,
     });
   };
 
-  const handleSave = (e: React.FormEvent) => {
+  const handleSave = async (e: React.FormEvent) => {
     e.preventDefault();
     // save to db
+    await handleCreateProduct(selectedFile, product);
     setIsSaveDisabled(true);
-    setFormState(defaultProduct);
-    setImage(null)
-    setPreview(null);
+    setProduct(defaultProduct);
+    setSelectedFile(null)
+    
   };
 
   const handleClean = () => {
-    setFormState(defaultProduct);
-    setImage(null)
-    setPreview(null);
+    setProduct(defaultProduct);
+    setSelectedFile(null)
+    
   };
 
   useEffect(() => {
-    const { name, quantity, price } = formState;
+    const { name, quantity, price } = product;
     if (name && quantity && price) {
       setIsSaveDisabled(false);
     } else {
       setIsSaveDisabled(true);
     }
-  }, [formState]);
+  }, [product]);
 
   return (
     <form>
@@ -69,7 +65,7 @@ function NewProduct() {
           <input
             type="text"
             name="name"
-            value={formState.name}
+            value={product.name}
             onChange={handleChange}
             required
             className="mt-1 p-2 border rounded-lg w-full"
@@ -81,7 +77,18 @@ function NewProduct() {
           <input
             type="text"
             name="description"
-            value={formState.description}
+            value={product.description}
+            onChange={handleChange}
+            className="mt-1 p-2 border rounded-lg w-full"
+          />
+        </div>
+
+        <div className="mb-4">
+          <label className="block">Categoria</label>
+          <input
+            type="text"
+            name="category"
+            value={product.category}
             onChange={handleChange}
             className="mt-1 p-2 border rounded-lg w-full"
           />
@@ -92,7 +99,7 @@ function NewProduct() {
           <input
             type="number"
             name="quantity"
-            value={formState.quantity}
+            value={product.quantity}
             onChange={handleChange}
             required
             className="mt-1 p-2 border rounded-lg w-full"
@@ -104,16 +111,16 @@ function NewProduct() {
           <input
             type="number"
             name="price"
-            value={formState.price}
+            value={product.price}
             onChange={handleChange}
             required
             className="mt-1 p-2 border rounded-lg w-full"
           />
         </div>
 
-        {preview ? (
+        {selectedFile ? (
           <div className="flex mt-5 h-20 w-20 relative justify-center">
-            <Image src={preview} alt="select img" layout="fill" objectFit="cover"  />
+            <Image src={selectedFile.toString()} alt="select img" layout="fill" objectFit="cover"  />
           </div>
         ) : (
           <div className="mb-4">
