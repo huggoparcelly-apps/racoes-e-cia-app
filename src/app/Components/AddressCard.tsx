@@ -5,7 +5,6 @@ import { Address } from "../types/Address";
 import { useCartStore } from "../stores/cartStore";
 
 export default function AddressCard() {
-  const { setAddress } = useCartStore();
   const defaultAddress = {
     street: "",
     number: "",
@@ -13,6 +12,7 @@ export default function AddressCard() {
     complement: "",
   };
 
+  const { setAddress } = useCartStore();
   const [formState, setFormState] = useState<Address>(defaultAddress);
   const [isSaveDisabled, setIsSaveDisabled] = useState(true);
 

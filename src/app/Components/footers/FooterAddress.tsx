@@ -3,19 +3,21 @@
 import { useRouter } from "next/navigation";
 import { useCartStore } from "../../stores/cartStore";
 
-export default function Footercart() {
+export default function FooterAddress() {
   const { cart, address } = useCartStore();
   const total = cart.reduce(
     (sum, item) => sum + item.product.price * item.quantity,
     0
   );
-  const totalIsZero = total === 0;
 
   const router = useRouter();
 
   const handleContinue = () => {
-    router.push("/address");
+    router.push("/checkout");
   };
+
+  console.log(address);
+  
   return (
     <footer className="fixed bottom-0 w-full flex items-center py-2 px-4 justify-between z-50 bg-yellow-300">
       <div className="rounded-lg text-start">
@@ -25,7 +27,7 @@ export default function Footercart() {
         </p>
       </div>
 
-      {totalIsZero ? (
+      {address === null ? (
         <></>
       ) : (
         <button
