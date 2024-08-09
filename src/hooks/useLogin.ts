@@ -1,7 +1,6 @@
 import useAuthStore from "@/app/stores/authStore";
 import { auth } from "@/services/firebase/firebaseConfig";
 import setCookie from "@/services/helpers/setCookie";
-import { NextApiResponse } from "next";
 import { useSignInWithEmailAndPassword } from "react-firebase-hooks/auth";
 
 const useLogin = () => {
@@ -14,7 +13,7 @@ const useLogin = () => {
     password: string;
   }
 
-  const login = async (inputs: LoginInputs, res: NextApiResponse) => {
+  const login = async (inputs: LoginInputs) => {
 
     if (!inputs.email || !inputs.password) {
       throw new Error("Please fill all the fields");

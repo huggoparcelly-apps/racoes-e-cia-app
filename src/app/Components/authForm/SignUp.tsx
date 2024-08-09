@@ -16,15 +16,15 @@ function SignUp() {
     <div>
       <input
         placeholder='Email'
-        className="border border-gray-300 rounded-md p-2 text-sm"
+        className="border border-gray-300 rounded-md p-2 text-sm w-full mb-2"
         type="email"
         value={inputs.email}
         onChange={(e) => setInputs({ ...inputs, email: e.target.value })}
       />
 
       <input
-        placeholder='Full Name'
-        className="border border-gray-300 rounded-md p-2 text-sm mt-2"
+        placeholder='Nome Completo'
+        className="border border-gray-300 rounded-md p-2 text-sm w-full mb-2"
         type="text"
         value={inputs.fullName}
         onChange={(e) => setInputs({ ...inputs, fullName: e.target.value })}
@@ -32,7 +32,7 @@ function SignUp() {
 
       <div className="relative mt-2">
         <input
-          placeholder='Password'
+          placeholder='Senha'
           className="border border-gray-300 rounded-md p-2 text-sm w-full"
           type={showPassword ? "text" : "password"}
           value={inputs.password}
