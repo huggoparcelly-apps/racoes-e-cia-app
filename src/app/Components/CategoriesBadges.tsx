@@ -16,7 +16,7 @@ export default function CategoriesBadges({ onSelectCategory, selectedCategory}: 
           key={index} 
           label={label} 
           isSelected={selectedCategory === label}
-          onClick={() => onSelectCategory(selectedCategory === label ? null : label)} 
+          onClick={() => onSelectCategory(selectedCategory === label ? null : label.toLowerCase())} 
         />
 
       ))}
