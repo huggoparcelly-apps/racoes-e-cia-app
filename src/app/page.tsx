@@ -31,9 +31,6 @@ export default function Home() {
   const filteredProductsByCategory = selectedCategory
     ? filteredProducts.filter(product => product.category === selectedCategory)
     : filteredProducts;
-
-  console.log(selectedCategory, filteredProductsByCategory);
-  
   
   return (
     <>
