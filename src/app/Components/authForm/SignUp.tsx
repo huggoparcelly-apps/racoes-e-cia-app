@@ -1,4 +1,5 @@
 import useSignUpWithEmailAndPassword from "@/hooks/useSignUpWithEmailAndPassword";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 interface Inputs {
@@ -11,6 +12,18 @@ function SignUp() {
   const [showPassword, setShowPassword] = useState(false);
   const{loading, error, signup} = useSignUpWithEmailAndPassword();
   const [inputs, setInputs] = useState<Inputs>({ email: '', fullName: '', password: '' });
+
+  const router = useRouter();
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    try {
+      await signup(inputs);
+      router.back();
+    } catch (error) {
+      console.error("Login error:", error);
+    }
+  };
 
   return (
     <div>
@@ -59,7 +72,7 @@ function SignUp() {
 
       <button
         className="w-full text-white bg-black mt-4 p-2 text-sm rounded-md"
-        onClick={() => signup(inputs)}
+        onClick={handleSubmit}
         disabled={loading}
       >
         {loading ? 'Loading...' : 'Criar'}

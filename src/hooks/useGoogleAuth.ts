@@ -54,6 +54,8 @@ const useGoogleAuth = () => {
           })
       }
 
+      
+
     } catch (error: any) {
       throw new Error(`Error ${error.message}`);
     }

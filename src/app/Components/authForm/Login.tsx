@@ -21,7 +21,6 @@ const Login = () => {
     try {
       await login(inputs);
       router.back();
-
     } catch (error) {
       console.error("Login error:", error);
     }
