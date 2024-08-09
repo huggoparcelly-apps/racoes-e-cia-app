@@ -1,7 +1,11 @@
 import useAuthStore from "@/app/stores/authStore";
 import { auth } from "@/services/firebase/firebaseConfig";
 import setCookie from "@/services/helpers/setCookie";
+import axios from "axios";
 import { useSignInWithGoogle } from "react-firebase-hooks/auth";
+
+const API_URL = process.env.NEXT_PUBLIC_BASE_API_URL;
+const BASE_URL = `${API_URL}/user`;
 
 const useGoogleAuth = () => {
 
@@ -21,35 +25,32 @@ const useGoogleAuth = () => {
       const token = await newUser?.user.getIdToken();
       setCookie("authToken", `${token}`, 1);
 
-      // await axios.get(`${BASE_URL}/users_id/${newUser.user.uid}`)
-      //   .then(response => {
-      //     localStorage.setItem("user-info", JSON.stringify(response.data.user));
-      //     loginUser(response.data.user);
-      //     existsUser = true;
-      //   })
-      //   .catch(err => {
-      //     existsUser = false;
-      //     console.log(err.message)
-      //   });
+      await axios.get(`${BASE_URL}/${newUser?.user.uid}`)
+        .then(response => {
+          localStorage.setItem("user-info", JSON.stringify(response.data.user));
+          loginUser(response.data.user);
+          existsUser = true;
+        })
+        .catch(err => {
+          existsUser = false;
+          console.log(err.message)
+        });
 
       if (!existsUser) {
         // Signup
         const userDoc = {
-          uid: newUser?.user.uid,
+          firebaseId: newUser?.user.uid,
           email: newUser?.user.email,
-          username: newUser?.user.email?.split("@")[0],
-          fullName: newUser?.user.displayName,
-          profilePicURL: newUser?.user.photoURL
+          name: newUser?.user.displayName
         }
-        localStorage.setItem("user-info", JSON.stringify(userDoc))
 
-        // await axios.post(`${BASE_URL}/users`, userDoc)
-        //   .then(response => {
-        //     if (response.status === 201 && response.data) {
-        //       localStorage.setItem("user-info", JSON.stringify(userDoc))
-        //       loginUser(userDoc)
-        //     }
-        //   })
+        await axios.post(`${BASE_URL}`, userDoc)
+          .then(response => {
+            if (response.status === 201 && response.data.userId) {
+              localStorage.setItem("user-info", JSON.stringify(userDoc))
+              loginUser(userDoc)
+            }
+          })
       }
 
     } catch (error: any) {

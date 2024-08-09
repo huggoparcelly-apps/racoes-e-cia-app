@@ -1,5 +1,6 @@
 import useAuthStore from "@/app/stores/authStore";
 import { auth } from "@/services/firebase/firebaseConfig";
+import axios from "axios";
 import { useCreateUserWithEmailAndPassword } from "react-firebase-hooks/auth";
 
 interface Inputs {
@@ -7,6 +8,9 @@ interface Inputs {
   fullName: string;
   password: string;
 }
+
+const API_URL = process.env.NEXT_PUBLIC_BASE_API_URL;
+const BASE_URL = `${API_URL}/user`;
 
 const useSignUpWithEmailAndPassword = () => {
 
@@ -31,18 +35,18 @@ const useSignUpWithEmailAndPassword = () => {
 
       if (newUser) {
         const userDoc = {
-          uid: newUser.user.uid,
+          firebaseId: newUser.user.uid,
           email: inputs.email,
-          fullName: inputs.fullName,
+          name: inputs.fullName,
         }
         
-        // await axios.post(`${BASE_URL}/users`, userDoc)
-        //   .then(response => {
-        //     if (response.status === 201 && response.data.userId) {
-        //       localStorage.setItem("user-info", JSON.stringify(userDoc))
-        //       loginUser(userDoc)
-        //     }
-        //   })
+        await axios.post(`${BASE_URL}`, userDoc)
+          .then(response => {
+            if (response.status === 201 && response.data.userId) {
+              localStorage.setItem("user-info", JSON.stringify(userDoc))
+              loginUser(userDoc)
+            }
+          })
       }
     } catch (error: any) {
       throw new Error(`Error ${error.message}`);

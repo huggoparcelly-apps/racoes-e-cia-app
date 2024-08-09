@@ -1,7 +1,11 @@
 import useAuthStore from "@/app/stores/authStore";
 import { auth } from "@/services/firebase/firebaseConfig";
 import setCookie from "@/services/helpers/setCookie";
+import axios from "axios";
 import { useSignInWithEmailAndPassword } from "react-firebase-hooks/auth";
+
+const API_URL = process.env.NEXT_PUBLIC_BASE_API_URL;
+const BASE_URL = `${API_URL}/user`;
 
 const useLogin = () => {
 
@@ -30,13 +34,11 @@ const useLogin = () => {
         const token = await userCred.user.getIdToken();
         setCookie("authToken", `${token}`, 1);
 
-        // res.setHeader('Set-Cookie', `authToken=${token}; HttpOnly; Path=/`);
-        // requisição no backend para trazer as infos do usuário e setar no localStotarage
-        // await axios.get(`${BASE_URL}/users_id/${userCred.user.uid}`)
-        //   .then(response => {
-        //     localStorage.setItem("user-info", JSON.stringify(response.data.user));
-        //     loginUser(response.data.user)
-        //   });
+        await axios.get(`${BASE_URL}/${userCred.user.uid}`)
+          .then(response => {
+            localStorage.setItem("user-info", JSON.stringify(response.data.user));
+            loginUser(response.data.user)
+          });
       }
 
     } catch (error: any) {
