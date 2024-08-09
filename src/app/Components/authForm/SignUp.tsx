@@ -62,7 +62,7 @@ function SignUp() {
         onClick={() => signup(inputs)}
         disabled={loading}
       >
-        {loading ? 'Loading...' : 'Sign Up'}
+        {loading ? 'Loading...' : 'Criar'}
       </button>
     </div>
   )

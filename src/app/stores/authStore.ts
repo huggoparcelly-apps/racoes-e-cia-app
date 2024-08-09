@@ -1,7 +1,8 @@
 import { create } from "zustand";
+import { User } from "../types/User";
 
 interface AuthState {
-  user: any | null;
+  user: User | null;
   login: (user: any) => void;
   logout: () => void;
   setUser: (user: any) => void;

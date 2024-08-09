@@ -11,7 +11,7 @@ export async function middleware(request: NextRequest) {
 
   if (protectedRoutes.some(route => url.pathname.startsWith(route))) {
     if (!token) {
-      url.pathname = '/login';
+      url.pathname = '/auth';
       return NextResponse.redirect(url);
     }
 
@@ -20,7 +20,7 @@ export async function middleware(request: NextRequest) {
       
       return NextResponse.next();
     } catch (error) {
-      url.pathname = '/login';
+      url.pathname = '/auth';
       return NextResponse.redirect(url);
     }
   }

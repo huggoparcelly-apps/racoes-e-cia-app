@@ -16,19 +16,20 @@ const useGoogleAuth = () => {
 
     try {
       const newUser = await signInWithGoogle();
-
+      
       if (!newUser && error) {
         throw new Error(`Error ${error.message}`);
       }
 
       let existsUser = true;
       const token = await newUser?.user.getIdToken();
-      setCookie("authToken", `${token}`, 1);
+      setCookie("authToken", `${token}`, 1);      
 
       await axios.get(`${BASE_URL}/${newUser?.user.uid}`)
         .then(response => {
-          localStorage.setItem("user-info", JSON.stringify(response.data.user));
-          loginUser(response.data.user);
+          console.log(response.data)
+          localStorage.setItem("user-info", JSON.stringify(response.data));
+          loginUser(response.data);
           existsUser = true;
         })
         .catch(err => {
@@ -46,9 +47,9 @@ const useGoogleAuth = () => {
 
         await axios.post(`${BASE_URL}`, userDoc)
           .then(response => {
-            if (response.status === 201 && response.data.userId) {
-              localStorage.setItem("user-info", JSON.stringify(userDoc))
-              loginUser(userDoc)
+            if (response.status === 201 && response.data.firebaseId) {
+              localStorage.setItem("user-info", JSON.stringify(response.data))
+              loginUser(response.data)
             }
           })
       }

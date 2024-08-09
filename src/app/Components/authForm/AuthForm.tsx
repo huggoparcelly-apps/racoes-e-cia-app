@@ -20,19 +20,19 @@ function AuthForm() {
           <div className="flex-2 h-px bg-gray-400"></div>
         </div>
 
-        <GoogleAuth prefix={isLogin ? "Log in" : "Sign up"} />
+        <GoogleAuth prefix={isLogin ? "Entrar" : "Criar"} />
       </div>
 
       <div className="p-5">
         <div className="flex items-center justify-center">
           <div className="mx-2 text-sm">
-            {isLogin ? "Do not have an account?" : "Already have an account?"}
+            {isLogin ? "Não tem uma conta?" : "Já tem uma conta?"}
           </div>
           <div
             onClick={() => setIsLogin(!isLogin)}
             className="mx-2 text-blue-500 cursor-pointer"
           >
-            {isLogin ? "Create Account" : "Log in"}
+            {isLogin ? "Criar Conta" : "Entrar"}
           </div>
         </div>
       </div>

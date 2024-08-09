@@ -42,9 +42,9 @@ const useSignUpWithEmailAndPassword = () => {
         
         await axios.post(`${BASE_URL}`, userDoc)
           .then(response => {
-            if (response.status === 201 && response.data.userId) {
-              localStorage.setItem("user-info", JSON.stringify(userDoc))
-              loginUser(userDoc)
+            if (response.status === 201 && response.data.firebaseId) {
+              localStorage.setItem("user-info", JSON.stringify(response.data))
+              loginUser(response.data)
             }
           })
       }

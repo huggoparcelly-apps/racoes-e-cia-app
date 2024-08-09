@@ -7,8 +7,15 @@ import { usePathname, useRouter } from "next/navigation";
 
 import logo from "/public/logo.png";
 import NavbarAdmin from "./NavbarAdmin";
+import LoginButton from "../buttons/LoginButton";
+import { useAuthState } from "react-firebase-hooks/auth";
+import { auth } from "@/services/firebase/firebaseConfig";
+import LogoutButton from "../buttons/LogoutButton";
 
 function Navbar() {
+  const [user, loading] = useAuthState(auth);
+	
+	const canRenderLogin = !user && !loading;
 
   const pathname = usePathname();
   const router = useRouter();
@@ -24,16 +31,7 @@ function Navbar() {
 
       {pathname.includes("/admin") ? <NavbarAdmin />  : <></>}
 
-      <div className="flex items-center gap-8 text-sm">
-        <div>
-          <button 
-            className="border rounded-md px-3 py-2 bg-yellow-900"
-            onClick={() => router.push("/auth")}
-          >
-            Login
-          </button>
-        </div>
-      </div>
+     {canRenderLogin ? <LoginButton /> : <LogoutButton />}
     </nav>
   );
 }

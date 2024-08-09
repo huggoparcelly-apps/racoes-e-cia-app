@@ -37,7 +37,7 @@ const Login = () => {
         onChange={(e) => setInputs({ ...inputs, email: e.target.value })}
       />
       <input
-        placeholder='Password'
+        placeholder='Senha'
         className="border border-gray-300 rounded-md p-2 text-sm w-full mb-4"
         type="password"
         value={inputs.password}
@@ -48,7 +48,7 @@ const Login = () => {
         onClick={handleSubmit}
         disabled={loading}
       >
-        {loading ? 'Loading...' : 'Log in'}
+        {loading ? 'Loading...' : 'Entrar'}
       </button>
     </div>
   );

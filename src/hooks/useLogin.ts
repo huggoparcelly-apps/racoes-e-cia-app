@@ -36,8 +36,8 @@ const useLogin = () => {
 
         await axios.get(`${BASE_URL}/${userCred.user.uid}`)
           .then(response => {
-            localStorage.setItem("user-info", JSON.stringify(response.data.user));
-            loginUser(response.data.user)
+            localStorage.setItem("user-info", JSON.stringify(response.data));
+            loginUser(response.data)
           });
       }
 

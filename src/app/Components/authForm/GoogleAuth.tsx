@@ -17,7 +17,7 @@ function GoogleAuth({prefix}: GoogleAuthProps) {
     >
       <Image src={googleImage} className="w-5" alt="Google Logo" />
       <span className="mx-2 text-blue-500">
-        {prefix} with Google
+        {prefix} com Google
       </span>
     </div>
   )
