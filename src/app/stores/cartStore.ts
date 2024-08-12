@@ -1,19 +1,22 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 import { Product } from "../types/Product";
-import { Item } from "../types/Item";
+import { Cart } from "../types/Cart";
 import { Address } from "../types/Address";
 
 type CartState = {
-  cart: Item[];
+  cart: Cart[];
 
   addProduct: (product: Product) => void;
   removeProduct: (product: Product) => void;
-  removeItem: (item: Item) => void;
+  removeItem: (item: Cart) => void;
   removeAllItens: () => void;
 
   address: Address | null;
   setAddress: (address: Address) => void;
+
+  paymentMethod: string | null;
+  setPaymentMethod: (paymentMethod: string) => void;
 };
 
 export const useCartStore = create<CartState>()(
@@ -75,6 +78,9 @@ export const useCartStore = create<CartState>()(
         }),
       address: null,
       setAddress: (address) => set({ address }),
+
+      paymentMethod: null,
+      setPaymentMethod: (paymentMethod) => set({ paymentMethod }),
 
     }),
     { name: "cart-storage" }

@@ -1,4 +1,5 @@
 import useAuthStore from "@/app/stores/authStore";
+import useUserProfileStore from "@/app/stores/userProfileStore";
 import { auth } from "@/services/firebase/firebaseConfig";
 import setCookie from "@/services/helpers/setCookie";
 import axios from "axios";
@@ -11,6 +12,7 @@ const useLogin = () => {
 
   const [signInWithEmailAndPassword, , loading, error] = useSignInWithEmailAndPassword(auth);
   const loginUser = useAuthStore(state => state.login);
+  const setToken = useUserProfileStore((state) => state.setUserToken);
   
   interface LoginInputs {
     email: string;
@@ -32,6 +34,7 @@ const useLogin = () => {
       }
       if (userCred) {
         const token = await userCred.user.getIdToken();
+        setToken(token);
         setCookie("authToken", `${token}`, 1);
 
         await axios.get(`${BASE_URL}/${userCred.user.uid}`)

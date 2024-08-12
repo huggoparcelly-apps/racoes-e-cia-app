@@ -1,12 +1,12 @@
 
-import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
+import { NextResponse } from 'next/server';
 
 
 export async function middleware(request: NextRequest) {
   const url = request.nextUrl.clone();
   const token = request.cookies.get('authToken');
-
+  
   const protectedRoutes = ['/admin', '/order', '/checkout'];
 
   if (protectedRoutes.some(route => url.pathname.startsWith(route))) {

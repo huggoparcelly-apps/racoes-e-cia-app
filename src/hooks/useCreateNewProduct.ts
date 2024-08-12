@@ -9,10 +9,7 @@ const useCreateNewProduct = () => {
   const [isLoading, setIsLoading] = useState(false);
   const createProduct = useProductStore((state) => state.createProduct);
 
-  const handleCreateProduct = async (
-    selectedFile: string | ArrayBuffer | null,
-    product: Product
-  ) => {
+  const handleCreateProduct = async (selectedFile: string | ArrayBuffer | null, product: Product) => {
     if (!product.name || !product.price || !product.quantity) {
       throw new Error("Please fill all the fields");
     }

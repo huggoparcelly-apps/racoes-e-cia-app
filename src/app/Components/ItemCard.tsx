@@ -1,10 +1,10 @@
 import Image from "next/image";
-import { Item } from "../types/Item";
+import { Cart } from "../types/Cart";
 import { useCartStore } from "../stores/cartStore";
 import golden from "/public/racao-golden.webp";
 
 type ItemProps = {
-  item: Item;
+  item: Cart;
 }
 
 export default function ItemCard({ item }: ItemProps) {
