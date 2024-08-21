@@ -35,7 +35,7 @@ const useCreateOrder = () => {
 
     try {
       
-      await createNewOrder(newOrder, token).then((response) => {
+      await createNewOrder(newOrder).then((response) => {
         console.log("Success", response.data.message, "success");
       });
 

@@ -2,6 +2,7 @@ import Image from 'next/image'
 import googleImage from '/public/google.png'
 import useGoogleAuth from '@/hooks/useGoogleAuth';
 import { useRouter } from 'next/navigation';
+import { log } from 'console';
 
 interface GoogleAuthProps {
   prefix: string;

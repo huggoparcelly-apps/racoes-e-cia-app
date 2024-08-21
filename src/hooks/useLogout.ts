@@ -1,19 +1,21 @@
 import useAuthStore from "@/app/stores/authStore";
-import useUserProfileStore from "@/app/stores/userProfileStore";
 import { auth } from "@/services/firebase/firebaseConfig";
+import setCookie from "@/services/helpers/setCookie";
+import { useRouter } from "next/navigation";
 import { useSignOut } from "react-firebase-hooks/auth";
 
 const useLogout = () => {
   const [signOut, isLogginOut, error] = useSignOut(auth);
   const logoutUser = useAuthStore((state) => state.logout);
-  const setToken = useUserProfileStore((state) => state.setUserToken);
+  const router = useRouter();
 
   const handleLogout = async () => {
     try {
       await signOut();
-      setToken(null);
+      setCookie("authToken", null, 1);
       localStorage.removeItem("user-info");
       logoutUser();
+      router.refresh();
     } catch (error: any) {
       throw new Error(`Error ${error.message}`);
     }

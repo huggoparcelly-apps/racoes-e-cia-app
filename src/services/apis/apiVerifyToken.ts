@@ -1,18 +1,16 @@
-
-import { Order } from "@/app/types/Order";
+import { Token } from "@/app/types/Token";
 import axios from "axios";
 
 const API_URL = process.env.NEXT_PUBLIC_BASE_API_URL;
-const BASE_URL = `${API_URL}/orders`;
+const BASE_URL = `${API_URL}/verifyToken`;
 
-export const createNewOrder = async (order: Order) => {
-  
+export const verifyToken = async (token: Token | null) => {
   try {
-    const { data } = await axios.post(BASE_URL, order, {
+    const { data } = await axios.post(BASE_URL, token, {
       headers: {
         'Content-Type': 'application/json',
-        // 'Authorization': `Bearer ${token}`
       },
+      
     });
 
     return data;
@@ -25,8 +23,8 @@ export const createNewOrder = async (order: Order) => {
       console.error(`Erro inesperado: ${error.message}`);
     }
 
-    // throw new Error(
-    //   "Falha ao cadastrar o pedido. Por favor, tente novamente mais tarde."
-    // );
+    throw new Error(
+      "Falha ao tentar login. Credenciais inválidas"
+    );
   }
 }

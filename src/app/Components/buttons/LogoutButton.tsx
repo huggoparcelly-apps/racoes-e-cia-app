@@ -1,7 +1,7 @@
 import useLogout from "@/hooks/useLogout";
 
 function LogoutButton() {
-  const { handleLogout, isLogginOut } = useLogout();
+  const { handleLogout } = useLogout();
   return (
     <div className="flex items-center gap-8 text-sm">
       <button
