@@ -30,7 +30,7 @@ const useGoogleAuth = () => {
           .get(`${BASE_URL}/${newUser.user.uid}`)
           .then((response) => {
             localStorage.setItem("user-info", JSON.stringify(response.data));
-            loginUser(response.data);
+            localStorage.setItem("user-token", JSON.stringify(token));
             existsUser = true;
           })
           .catch((err) => {

@@ -35,7 +35,7 @@ const useCreateOrder = () => {
 
     try {
       
-      await createNewOrder(newOrder, user?.firebaseId)
+      await createNewOrder(newOrder, userToken)
 
     } catch (error: any) {
       throw new Error(`Error ${error.message}`);

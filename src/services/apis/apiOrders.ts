@@ -5,13 +5,13 @@ import axios from "axios";
 const API_URL = process.env.NEXT_PUBLIC_BASE_API_URL;
 const BASE_URL = `${API_URL}/orders`;
 
-export const createNewOrder = async (order: Order, userFirebaseId?: string) => {
+export const createNewOrder = async (order: Order, token: string | null) => {
   
   try {
-    const { data } = await axios.post(`${BASE_URL}/${userFirebaseId}`, order, {
+    const { data } = await axios.post(BASE_URL, order, {
       headers: {
         'Content-Type': 'application/json',
-        // 'Authorization': `Bearer ${token}`
+        'Authorization': `Bearer ${token}`
       },
     });
     
