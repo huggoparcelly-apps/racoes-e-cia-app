@@ -1,5 +1,5 @@
+import useAuthStore from "@/app/stores/authStore";
 import { useCartStore } from "@/app/stores/cartStore";
-import useUserProfileStore from "@/app/stores/userProfileStore";
 import { Item } from "@/app/types/Item";
 import { Order } from "@/app/types/Order";
 import { createNewOrder } from "@/services/apis/apiOrders";
@@ -8,7 +8,7 @@ import { useState } from "react";
 const useCreateOrder = () => {
   const { cart, address, paymentMethod } = useCartStore();
   const [isLoading, setIsLoading] = useState(false);
-  const token = useUserProfileStore((state) => state.userToken);
+  const { userToken, user } = useAuthStore();
 
   const subTotal = cart.reduce(
     (sum, item) => sum + item.product.price * item.quantity,
@@ -35,9 +35,7 @@ const useCreateOrder = () => {
 
     try {
       
-      await createNewOrder(newOrder).then((response) => {
-        console.log("Success", response.data.message, "success");
-      });
+      await createNewOrder(newOrder, user?.firebaseId)
 
     } catch (error: any) {
       throw new Error(`Error ${error.message}`);

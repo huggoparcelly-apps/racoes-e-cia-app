@@ -5,17 +5,16 @@ import Link from "next/link";
 
 import { usePathname, useRouter } from "next/navigation";
 
-import logo from "/public/logo.png";
-import NavbarAdmin from "./NavbarAdmin";
+import useAuthStore from "@/app/stores/authStore";
 import LoginButton from "../buttons/LoginButton";
-import { useAuthState } from "react-firebase-hooks/auth";
-import { auth } from "@/services/firebase/firebaseConfig";
 import LogoutButton from "../buttons/LogoutButton";
+import NavbarAdmin from "./NavbarAdmin";
+import logo from "/public/logo.png";
 
 function Navbar() {
-  const [user, loading] = useAuthState(auth);
-	
-	const canRenderLogin = !user && !loading;
+
+  const user = useAuthStore(state => state.user);
+	const canRenderLogin = !user;
 
   const pathname = usePathname();
   const router = useRouter();

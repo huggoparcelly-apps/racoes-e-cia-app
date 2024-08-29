@@ -8,4 +8,5 @@ export type User = {
   orders?: Order[];
   addresses?: Address[]; 
   role: string;
+  firebaseId?: string;
 }

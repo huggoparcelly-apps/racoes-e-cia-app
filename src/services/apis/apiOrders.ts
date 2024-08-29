@@ -5,17 +5,18 @@ import axios from "axios";
 const API_URL = process.env.NEXT_PUBLIC_BASE_API_URL;
 const BASE_URL = `${API_URL}/orders`;
 
-export const createNewOrder = async (order: Order) => {
+export const createNewOrder = async (order: Order, userFirebaseId?: string) => {
   
   try {
-    const { data } = await axios.post(BASE_URL, order, {
+    const { data } = await axios.post(`${BASE_URL}/${userFirebaseId}`, order, {
       headers: {
         'Content-Type': 'application/json',
         // 'Authorization': `Bearer ${token}`
       },
     });
-
+    
     return data;
+
   } catch (error: any) {
     if (axios.isAxiosError(error)) {
       console.error(`Erro de rede: ${error.message}`);

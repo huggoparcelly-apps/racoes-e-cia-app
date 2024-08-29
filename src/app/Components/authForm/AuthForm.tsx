@@ -8,7 +8,6 @@ import GoogleAuth from "./GoogleAuth";
 function AuthForm() {
   const [isLogin, setIsLogin] = useState(true);
 
-
   return (
     <div className="mt-5">
       <div className="space-y-5">

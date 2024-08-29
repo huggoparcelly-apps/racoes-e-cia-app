@@ -1,15 +1,17 @@
 import type { NextRequest } from 'next/server';
 import { NextResponse } from 'next/server';
-import { verifyToken } from './services/apis/apiVerifyToken';
 import { Token } from './app/types/Token';
+import { verifyToken } from './services/apis/apiVerifyToken';
 
 export async function middleware(request: NextRequest) {
   const url = request.nextUrl.clone();
-  const token = request.cookies.get('authToken');
+  
 
   const protectedRoutes = ['/admin', '/order', '/checkout'];
 
   if (protectedRoutes.some(route => url.pathname.startsWith(route))) {
+    const token = request.cookies.get('authToken');
+
     if (!token) {
       url.pathname = '/auth';
       return NextResponse.redirect(url);

@@ -11,6 +11,7 @@ const useLogin = () => {
 
   const [signInWithEmailAndPassword, , loading, error] = useSignInWithEmailAndPassword(auth);
   const loginUser = useAuthStore(state => state.login);
+  const setToken = useAuthStore((state) => state.setUserToken);
   
   interface LoginInputs {
     email: string;
@@ -33,6 +34,7 @@ const useLogin = () => {
       if (userCred) {
         const token = await userCred.user.getIdToken();
         setCookie("authToken", `${token}`, 1);
+        setToken(token);
 
         await axios.get(`${BASE_URL}/${userCred.user.uid}`)
           .then(response => {

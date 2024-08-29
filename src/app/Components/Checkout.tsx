@@ -21,8 +21,12 @@ export default function Checkout() {
       // Redireciona para o checkout do Stripe
       router.push("/checkout/stripe"); // Substitua com a URL correta do seu checkout Stripe
     
+    } else if (paymentMethod === "pix") {
+      // await handleCreateOrder();
+      // redirecionar para página com chave pix
     } else if (paymentMethod === "money") {
       // enviar pedido para o Backend
+      
       await handleCreateOrder();
       removeAllItens();
       router.push("/orders");
@@ -68,7 +72,7 @@ export default function Checkout() {
         Selecionar forma de pagamento
       </h2>
       <div className="mb-4">
-        <div className="flex items-center mb-2">
+        <div className="flex items-center">
           <input
             type="radio"
             id="card"
@@ -79,6 +83,18 @@ export default function Checkout() {
             onChange={handlePaymentMethodChange}
           />
           <label htmlFor="card">Cartão (Credito/Débito)</label>
+        </div>
+        <div className="flex items-center my-2">
+          <input
+            type="radio"
+            id="pix"
+            name="payment"
+            value="pix"
+            className="mr-2"
+            checked={paymentMethod === "pix"}
+            onChange={handlePaymentMethodChange}
+          />
+          <label htmlFor="pix">PIX</label>
         </div>
         <div className="flex items-center">
           <input

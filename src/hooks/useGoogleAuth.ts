@@ -1,5 +1,4 @@
 import useAuthStore from "@/app/stores/authStore";
-import useUserProfileStore from "@/app/stores/userProfileStore";
 import { auth } from "@/services/firebase/firebaseConfig";
 import setCookie from "@/services/helpers/setCookie";
 import axios from "axios";
@@ -11,12 +10,12 @@ const BASE_URL = `${API_URL}/user`;
 const useGoogleAuth = () => {
   const [signInWithGoogle, , , error] = useSignInWithGoogle(auth);
   const loginUser = useAuthStore((state) => state.login);
-  const setToken = useUserProfileStore((state) => state.setUserToken);
+  const setToken = useAuthStore((state) => state.setUserToken);
 
   const handleGoogleAuth = async () => {
     try {
       const newUser = await signInWithGoogle();
-
+    
       if (!newUser && error) {
         throw new Error(`Error ${error.message}`);
       }

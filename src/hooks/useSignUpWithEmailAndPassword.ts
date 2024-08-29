@@ -1,6 +1,6 @@
 import useAuthStore from "@/app/stores/authStore";
-import useUserProfileStore from "@/app/stores/userProfileStore";
 import { auth } from "@/services/firebase/firebaseConfig";
+import setCookie from "@/services/helpers/setCookie";
 import axios from "axios";
 import { useCreateUserWithEmailAndPassword } from "react-firebase-hooks/auth";
 
@@ -20,7 +20,7 @@ const useSignUpWithEmailAndPassword = () => {
 
   
   const loginUser = useAuthStore(state => state.login);
-  const setToken = useUserProfileStore((state) => state.setUserToken);
+  const setToken = useAuthStore((state) => state.setUserToken);
 
   const signup = async (inputs: Inputs) => {
     if (!inputs.email || !inputs.password || !inputs.fullName) {
@@ -37,7 +37,8 @@ const useSignUpWithEmailAndPassword = () => {
 
       if (newUser) {
         const token = await newUser.user.getIdToken();
-        setToken(token)
+        setToken(token);
+        setCookie("authToken", `${token}`, 1);
         
         const userDoc = {
           firebaseId: newUser.user.uid,
