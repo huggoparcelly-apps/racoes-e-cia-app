@@ -1,4 +1,9 @@
+'use client'
 import OrderDetailCard from "@/app/Components/OrderDetailCard";
+import { useOrderContext } from "@/app/Context/OrdersContext";
+import useAuthStore from "@/app/stores/authStore";
+import { getOrderById } from "@/services/apis/apiOrders";
+import { useEffect } from "react";
 
 type OrderPageProps = {
   params: {
@@ -6,44 +11,43 @@ type OrderPageProps = {
   };
 };
 
-type OrderItem = {
-  name: string;
-  quantity: number;
-  price: number;
-};
+export default function OrderDetailPage({ params: { id: orderId } }: OrderPageProps) {
 
-export default function OrderDetailPage({ params: { id } }: OrderPageProps) {
-  const orderNumber = id;
-  const orderDate = "01/12/2024";
+  const { userToken } = useAuthStore();
+  const {setOrder, order} = useOrderContext();
 
-  const items: OrderItem[] = [
-    { name: "Ração Premier Filhote", quantity: 10, price: 10.9 },
-    { name: "Ração Premier Filhote", quantity: 10, price: 10.9 },
-    { name: "Ração Premier Filhote", quantity: 10, price: 10.9 },
-    { name: "Ração Premier Filhote", quantity: 10, price: 10.9 },
-    { name: "Ração Premier Filhote", quantity: 10, price: 10.9 },
-  ];
+  useEffect(() => {
+    const getOrder = async () => {
+      const order = await getOrderById(userToken, orderId);
+      setOrder(order);
+    };
+    getOrder();
+  }, [userToken, setOrder, orderId])
 
-  const total = items.reduce(
-    (acc, item) => acc + item.quantity * item.price,
-    0
-  );
+  const date = new Date(order.date);
+  const formattedDate = date.toLocaleString('pt-BR', {
+    year: 'numeric',
+    month: '2-digit',
+    day: '2-digit',
+    hour: '2-digit',
+    minute: '2-digit'
+  })
 
   return (
     <div className="max-w-md mx-auto px-4 pb-16 rounded-lg flow-root">
       
       <div className="flex justify-between mb-4">
-        <h2 className="text-xl font-bold">Pedido N. {orderNumber}</h2>
-        <p className="text-gray-500">{orderDate}</p>
+        <h2 className="text-xl font-bold">Pedido N. {order.id}</h2>
+        <p className="text-gray-500">{formattedDate}</p>
       </div>
 
-      {items.map((item, index) => (
-        <OrderDetailCard key={index} item={item} />
+      {order.itens.map((item) => (
+        <OrderDetailCard key={item.productId} item={item} />
       ))}
 
       <div className="flex justify-between font-bold text-lg mt-4">
         <p>Total</p>
-        <p>R$ {total.toFixed(2)}</p>
+        <p>R$ {order.totalAmount}</p>
       </div>
 
       <button 

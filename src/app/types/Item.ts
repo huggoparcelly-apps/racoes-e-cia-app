@@ -1,6 +1,7 @@
 
 export type Item = {
   productId?: number;
-  productsName?: string;
+  productName?: string;
+  price?: number;
   quantity: number;
 }
