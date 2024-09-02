@@ -6,8 +6,8 @@ interface AuthState {
   login: (user: any) => void;
   logout: () => void;
   setUser: (user: any) => void;
-  userToken: String | null;
-  setUserToken: (userToken: String | null) => void;
+  userToken: string | null;
+  setUserToken: (userToken: string | null) => void;
 }
 
 const useAuthStore = create<AuthState>((set) => ({

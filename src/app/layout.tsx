@@ -7,6 +7,7 @@ import Hydrate from "./Components/Hydrate";
 import Navbar from "./Components/navbars/Navbar";
 import { ProductsProvider } from "./Context/ProductsContext";
 import "./globals.css";
+import { OrdersProvider } from "./Context/OrdersContext";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -28,7 +29,11 @@ export default function RootLayout({
             <Navbar />
             <BackButton />
             <main className="flex-grow overflow-y-auto pt-32">
-              <ProductsProvider>{children}</ProductsProvider>
+              <ProductsProvider>
+                <OrdersProvider>
+                {children}
+                </OrdersProvider>
+              </ProductsProvider>
             </main>
             <Footer />
           </div>

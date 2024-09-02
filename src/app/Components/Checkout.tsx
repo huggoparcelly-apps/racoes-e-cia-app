@@ -77,7 +77,7 @@ export default function Checkout() {
             type="radio"
             id="card"
             name="payment"
-            value="card"
+            value="cartão"
             className="mr-2"
             checked={paymentMethod === "card"}
             onChange={handlePaymentMethodChange}
@@ -101,7 +101,7 @@ export default function Checkout() {
             type="radio"
             id="money"
             name="payment"
-            value="money"
+            value="dinheiro"
             className="mr-2"
             checked={paymentMethod === "money"}
             onChange={handlePaymentMethodChange}
