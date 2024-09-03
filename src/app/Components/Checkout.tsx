@@ -17,14 +17,14 @@ export default function Checkout() {
   };
 
   const handleConfirmOrder = async () => {
-    if (paymentMethod === "card") {
+    if (paymentMethod === "cartao") {
       // Redireciona para o checkout do Stripe
       router.push("/checkout/stripe"); // Substitua com a URL correta do seu checkout Stripe
     
     } else if (paymentMethod === "pix") {
       // await handleCreateOrder();
       // redirecionar para página com chave pix
-    } else if (paymentMethod === "money") {
+    } else if (paymentMethod === "dinheiro") {
       // enviar pedido para o Backend
       
       await handleCreateOrder();
@@ -77,12 +77,12 @@ export default function Checkout() {
             type="radio"
             id="card"
             name="payment"
-            value="cartão"
+            value="cartao"
             className="mr-2"
-            checked={paymentMethod === "card"}
+            checked={paymentMethod === "cartao"}
             onChange={handlePaymentMethodChange}
           />
-          <label htmlFor="card">Cartão (Credito/Débito)</label>
+          <label htmlFor="cartao">Cartão (Credito/Débito)</label>
         </div>
         <div className="flex items-center my-2">
           <input
@@ -99,14 +99,14 @@ export default function Checkout() {
         <div className="flex items-center">
           <input
             type="radio"
-            id="money"
+            id="dinheiro"
             name="payment"
             value="dinheiro"
             className="mr-2"
-            checked={paymentMethod === "money"}
+            checked={paymentMethod === "dinheiro"}
             onChange={handlePaymentMethodChange}
           />
-          <label htmlFor="money">Dinheiro (Pagar na entrega)</label>
+          <label htmlFor="dinheiro">Dinheiro (Pagar na entrega)</label>
         </div>
       </div>
 

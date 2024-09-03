@@ -39,6 +39,7 @@ const useLogin = () => {
         await axios.get(`${BASE_URL}/${userCred.user.uid}`)
           .then(response => {
             localStorage.setItem("user-info", JSON.stringify(response.data));
+            localStorage.setItem("user-token", JSON.stringify(token));
             loginUser(response.data)
           });
       }
