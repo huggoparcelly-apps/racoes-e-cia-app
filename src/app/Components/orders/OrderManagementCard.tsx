@@ -51,14 +51,14 @@ export default function OrderManagementCard({ order }: OrderProps) {
             <p className='font-semibold'>Itens</p>
             
             <ul className='mb-3'>
-              {order.itens?.map((item, index) => (
+              {order.items?.map((item, index) => (
                 <li key={index}>
                   {item.productName} - Qnt. {item.quantity}
                 </li>
               ))}
             </ul>
 
-            <span className="font-bold">Valor R${order.totalAmount}</span>
+            <span className="font-bold">Valor R${order.totalAmount} - {order.paymentType?.toUpperCase()}</span>
             
           </div>
           <div className="mt-2 flex justify-between items-center">

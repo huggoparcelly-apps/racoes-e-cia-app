@@ -2,12 +2,18 @@ import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 import { useCartStore } from "../stores/cartStore";
 import useCreateOrder from "@/hooks/useCreateOrder";
+import { getStripeConfig } from "@/services/stripe/stripeConfig";
+import { Order } from "../types/Order";
+import { Item } from "../types/Item";
+import axios from "axios";
+
+const API_URL = process.env.NEXT_PUBLIC_BASE_API_URL;
 
 export default function Checkout() {
   
   const router = useRouter();
 
-  const { cart, address, paymentMethod, setPaymentMethod, removeAllItens } = useCartStore();
+  const { cart, address, paymentMethod, setPaymentMethod, removeAllItems } = useCartStore();
   const { handleCreateOrder } = useCreateOrder();
 
   const handlePaymentMethodChange = (
@@ -15,20 +21,47 @@ export default function Checkout() {
   ) => {
     setPaymentMethod(event.target.value);
   };
+  const [loading, setLoading] = useState(false);
+    
+  const stripeOrder = async (order: Order) => {
+    setLoading(true);
+
+    setLoading(false);
+  };
+
+  const getNewOrder = (): Order => {
+    
+    const items: Item[] = cart.map((cartItem) => ({
+      productId: cartItem.product.id,
+      price: cartItem.product.price,
+      quantity: cartItem.quantity,
+    }));
+
+    return {
+      items: items,
+      address: address,
+      totalAmount: total,
+      status: "Aguardando",
+      date: new Date(Date.now()),
+      paymentType: paymentMethod,
+    };
+  }
 
   const handleConfirmOrder = async () => {
+    const newOrder = getNewOrder();
+
     if (paymentMethod === "cartao") {
-      // Redireciona para o checkout do Stripe
-      router.push("/checkout/stripe"); // Substitua com a URL correta do seu checkout Stripe
-    
+      // Redireciona para o checkout do Stripe  
+      handleCreateOrder(newOrder);
+      removeAllItems();
+      
     } else if (paymentMethod === "pix") {
       // await handleCreateOrder();
       // redirecionar para página com chave pix
     } else if (paymentMethod === "dinheiro") {
-      // enviar pedido para o Backend
-      
-      await handleCreateOrder();
-      removeAllItens();
+      // enviar o pedido
+      await handleCreateOrder(newOrder);
+      removeAllItems();
       router.push("/orders");
     }
   };

@@ -5,7 +5,7 @@ export type Order = {
   id?: number;
   date: Date; 
   address: Address | null; 
-  itens: Item[];
+  items: Item[];
   totalAmount: number;
   status: string;
   paymentType: string | null;

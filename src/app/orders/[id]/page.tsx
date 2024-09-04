@@ -36,7 +36,7 @@ export default function OrderDetailPage({ params: { id: orderId } }: OrderPagePr
         <p className="text-gray-500">{formattedDate}</p>
       </div>
 
-      {order.itens.map((item) => (
+      {order.items?.map((item) => (
         <OrderDetailCard key={item.productId} item={item} />
       ))}
 

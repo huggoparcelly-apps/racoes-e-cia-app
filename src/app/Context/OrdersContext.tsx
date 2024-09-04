@@ -14,7 +14,7 @@ const defaultOrder: Order = {
   id: 0,
   date: new Date(),
   address: null,
-  itens: [],
+  items: [],
   totalAmount: 0,
   status: '',
   paymentType: ''
