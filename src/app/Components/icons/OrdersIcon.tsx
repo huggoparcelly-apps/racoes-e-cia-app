@@ -1,15 +1,18 @@
 
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { IoGiftSharp } from "react-icons/io5";
 export default function OrdersIcon() {
-  return (
+  const router = useRouter();
+
+  return (  
     <>
-      <Link
-        href='/orders'
+      <button
+        onClick={() => router.push("/orders")}
         className="flex items-center cursor-pointer relative"
       >
         <IoGiftSharp className="size-7"/>
-      </Link>
+      </button>
     </>
   )
 }

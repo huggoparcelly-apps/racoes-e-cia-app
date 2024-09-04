@@ -13,8 +13,7 @@ const useLogout = () => {
     try {
       await signOut();
       setCookie("authToken", null, 1);
-      localStorage.removeItem("user-info");
-      localStorage.removeItem("user-token");
+      sessionStorage.removeItem("user-token");
       logoutUser();
       router.refresh();
     } catch (error: any) {
