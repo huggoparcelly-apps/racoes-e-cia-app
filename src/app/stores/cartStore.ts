@@ -10,7 +10,7 @@ type CartState = {
   addProduct: (product: Product) => void;
   removeProduct: (product: Product) => void;
   removeItem: (item: Cart) => void;
-  removeAllItens: () => void;
+  removeAllItems: () => void;
 
   address: Address | null;
   setAddress: (address: Address) => void;
@@ -72,7 +72,7 @@ export const useCartStore = create<CartState>()(
           cart: state.cart.filter((i) => i.product.id !== item.product.id),
         })),
 
-      removeAllItens: () =>
+      removeAllItems: () =>
         set(() => {
           return { cart: [] };
         }),

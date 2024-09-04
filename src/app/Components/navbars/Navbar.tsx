@@ -13,11 +13,12 @@ import logo from "/public/logo.png";
 
 function Navbar() {
 
-  const user = useAuthStore(state => state.user);
+  const user = useAuthStore(state => state.userToken);
+
 	const canRenderLogin = !user;
 
   const pathname = usePathname();
-  const router = useRouter();
+  
 
   return (
     <nav className="fixed top-0 w-full flex item-center py-2 px-8 justify-between z-50 bg-yellow-300 text-slate-200">

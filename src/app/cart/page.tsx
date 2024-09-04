@@ -5,7 +5,7 @@ import { useCartStore } from "../stores/cartStore";
 
 export default function CartPage() {
 
-  const { cart, removeAllItens } = useCartStore();
+  const { cart, removeAllItems } = useCartStore();
 
   const total = cart.reduce(
     (sum, item) => sum + item.product.price * item.quantity, 0);
@@ -15,7 +15,7 @@ export default function CartPage() {
       
       <div className="flex justify-between px-2">
         <h1 className="text-xl font-bold">Carrinho</h1>
-        <button className="text-red-500" onClick={() => removeAllItens()}>
+        <button className="text-red-500" onClick={() => removeAllItems()}>
           Limpar
         </button>
       </div>

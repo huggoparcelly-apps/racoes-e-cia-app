@@ -5,15 +5,17 @@ import { Address } from "../types/Address";
 import { useCartStore } from "../stores/cartStore";
 
 export default function AddressCard() {
+  
+  const { address, setAddress } = useCartStore();
+  
   const defaultAddress = {
     street: "",
     number: "",
     neighborhood: "",
     complement: "",
   };
-
-  const { setAddress } = useCartStore();
-  const [formState, setFormState] = useState<Address>(defaultAddress);
+  
+  const [formState, setFormState] = useState<Address>(address || defaultAddress);
   const [isSaveDisabled, setIsSaveDisabled] = useState(true);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {

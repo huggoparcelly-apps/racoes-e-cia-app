@@ -23,14 +23,13 @@ const useGoogleAuth = () => {
       let existsUser = false;
       if (newUser) {
         const token = await newUser.user.getIdToken();
-        setToken(token);
         setCookie("authToken", `${token}`, 1);
+        setToken(token);
 
         await axios
           .get(`${BASE_URL}/${newUser.user.uid}`)
           .then((response) => {
-            localStorage.setItem("user-info", JSON.stringify(response.data));
-            localStorage.setItem("user-token", JSON.stringify(token));
+            loginUser(response.data)
             existsUser = true;
           })
           .catch((err) => {

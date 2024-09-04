@@ -39,7 +39,7 @@ export default function OrderCard({order}: OrderProps) {
 
         <div className="mt-2 flex justify-between">
           <span className="font-bold">Valor R$ {order.totalAmount.toFixed(2)}</span>
-          <span className="font-bold">Qnt. {order.itens?.length}</span>
+          <span className="font-bold">Qnt. {order.items?.length}</span>
         </div>
 
         <div className="mt-2 text-sm">
