@@ -1,8 +1,10 @@
 'use client'
-import OrderDetailCard from "@/app/Components/OrderDetailCard";
+import OrderDetailCard from "@/app/Components/orders/OrderDetailCard";
 import { useOrderContext } from "@/app/Context/OrdersContext";
 import useAuthStore from "@/app/stores/authStore";
 import { getOrderById } from "@/services/apis/apiOrders";
+import getFormattedDate from "@/services/helpers/getFormattedDate";
+
 import { useEffect } from "react";
 
 type OrderPageProps = {
@@ -24,14 +26,7 @@ export default function OrderDetailPage({ params: { id: orderId } }: OrderPagePr
     getOrder();
   }, [userToken, setOrder, orderId])
 
-  const date = new Date(order.date);
-  const formattedDate = date.toLocaleString('pt-BR', {
-    year: 'numeric',
-    month: '2-digit',
-    day: '2-digit',
-    hour: '2-digit',
-    minute: '2-digit'
-  })
+  const formattedDate = getFormattedDate(order.date);
 
   return (
     <div className="max-w-md mx-auto px-4 pb-16 rounded-lg flow-root">
@@ -50,12 +45,12 @@ export default function OrderDetailPage({ params: { id: orderId } }: OrderPagePr
         <p>R$ {order.totalAmount}</p>
       </div>
 
-      <button 
+      {/* <button 
         className="my-4 w-full bg-green-600 text-white py-2 rounded-lg hover:bg-green-700"
         
       >
         Repetir Pedido
-      </button>
+      </button> */}
     </div>
   );
 }

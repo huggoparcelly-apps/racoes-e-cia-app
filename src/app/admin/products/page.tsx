@@ -1,7 +1,7 @@
 'use client';
 
 import AddProductAdmin from "@/app/Components/buttons/AddProductAdmin";
-import ProductCardAdmin from "@/app/Components/productCards/ProductCardAdmin";
+import ProductCardAdmin from "@/app/Components/products/ProductCardAdmin";
 import SearchBar from "@/app/Components/SearchBar";
 import { useProductContext } from "@/app/Context/ProductsContext";
 import { Product } from "@/app/types/Product";

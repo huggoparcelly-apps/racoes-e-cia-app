@@ -1,5 +1,5 @@
 import React from "react";
-import { Item } from "../types/Item";
+import { Item } from "../../types/Item";
 
 
 type OrderProps = {
@@ -13,13 +13,13 @@ export default function OrderDetailCard({item}: OrderProps) {
       <div className="flex justify-between">
         <p>{item.productName}</p>
       </div>
-      <div className="flex justify-between text-sm ">
-        <p>Qnt.</p>
-        <p>{item.quantity}</p>
-      </div>
       <div className="flex justify-between text-sm text-gray-500">
         <p>unit</p>
         <p className="font-semibold">R$ {item.price?.toFixed(2)}</p>
+      </div>
+      <div className="flex justify-between text-sm ">
+        <p>Qnt.</p>
+        <p>{item.quantity}</p>
       </div>
       <div className="flex justify-between text-sm">
         <p></p>

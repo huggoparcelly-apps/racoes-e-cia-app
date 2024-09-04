@@ -1,13 +1,12 @@
 'use client'
 import { getAllOrders } from "@/services/apis/apiOrders";
 import { useEffect } from "react";
-import OrderCard from "../Components/OrderCard";
+import OrderCard from "../Components/orders/OrderCard";
 import useAuthStore from "../stores/authStore";
 
 import { useOrderContext } from "../Context/OrdersContext";
 
 export default function OrdersPage() {
-
 
   const {setAllOrders, allOrders} = useOrderContext();
   const { userToken } = useAuthStore();
