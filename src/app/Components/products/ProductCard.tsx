@@ -26,8 +26,10 @@ export default function ProductCard({ product }: ProductProps) {
       <div className="flex flex-col relative h-40 w-20 overflow-hidden rounded-md ">
         <Link href={`/products/${product.id}`}>
           <Image
-            src={golden}
+            src={product.image === 'image'? golden : product.image}
             alt={product.description || "Ração"}
+            width={80}
+            height={128}
             className="h-32 w-20 object-cover object-center"
           />
         </Link>

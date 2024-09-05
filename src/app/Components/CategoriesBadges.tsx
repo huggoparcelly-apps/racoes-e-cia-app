@@ -6,7 +6,7 @@ type CategoriesProps = {
 };
 
 export default function CategoriesBadges({ onSelectCategory, selectedCategory}: CategoriesProps) {
-  const labels = ["Cachorro", "Gato", "Pássaro"];
+  const labels = ["Cachorro", "Gato", "Ave"];
 
   return (
     <div className="flex justify-between md:justify-center space-x-2 my-3 ">
@@ -16,7 +16,7 @@ export default function CategoriesBadges({ onSelectCategory, selectedCategory}: 
           key={index} 
           label={label} 
           isSelected={selectedCategory === label}
-          onClick={() => onSelectCategory(selectedCategory === label ? null : label.toLowerCase())} 
+          onClick={() => onSelectCategory(selectedCategory === label.toLowerCase() ? null : label.toLowerCase())} 
         />
 
       ))}

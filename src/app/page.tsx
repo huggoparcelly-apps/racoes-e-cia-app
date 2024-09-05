@@ -29,7 +29,7 @@ export default function Home() {
   };
 
   const filteredProductsByCategory = selectedCategory
-    ? filteredProducts.filter(product => product.category === selectedCategory)
+    ? filteredProducts.filter(product => product.category?.toLowerCase() === selectedCategory)
     : filteredProducts;
   
   return (
