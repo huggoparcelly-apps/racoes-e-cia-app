@@ -13,8 +13,6 @@ export async function middleware(request: NextRequest) {
     const token = request.cookies.get('authToken');
     
     if (!token) {
-      console.log("não tenho token");
-      
       url.pathname = '/auth';
       return NextResponse.redirect(url);
     }
@@ -27,7 +25,6 @@ export async function middleware(request: NextRequest) {
       const result = await verifyToken(tokenBody);
 
       if (!result.valid) {
-        console.log("token não valido");
         url.pathname = '/auth';
         return NextResponse.redirect(url);
       }

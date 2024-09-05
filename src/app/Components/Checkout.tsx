@@ -10,19 +10,19 @@ import axios from "axios";
 const API_URL = process.env.NEXT_PUBLIC_BASE_API_URL;
 
 export default function Checkout() {
-  
   const router = useRouter();
 
-  const { cart, address, paymentMethod, setPaymentMethod, removeAllItems } = useCartStore();
+  const { cart, address, paymentMethod, setPaymentMethod, removeAllItems } =
+    useCartStore();
   const { handleCreateOrder } = useCreateOrder();
+  const [loading, setLoading] = useState(false);
 
   const handlePaymentMethodChange = (
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
     setPaymentMethod(event.target.value);
   };
-  const [loading, setLoading] = useState(false);
-    
+
   const stripeOrder = async (order: Order) => {
     setLoading(true);
 
@@ -30,7 +30,6 @@ export default function Checkout() {
   };
 
   const getNewOrder = (): Order => {
-    
     const items: Item[] = cart.map((cartItem) => ({
       productId: cartItem.product.id,
       price: cartItem.product.price,
@@ -45,19 +44,18 @@ export default function Checkout() {
       date: new Date(Date.now()),
       paymentType: paymentMethod,
     };
-  }
+  };
 
   const handleConfirmOrder = async () => {
     const newOrder = getNewOrder();
 
     if (paymentMethod === "cartao") {
-      // Redireciona para o checkout do Stripe  
+      // Redireciona para o checkout do Stripe
       handleCreateOrder(newOrder);
       removeAllItems();
-      
     } else if (paymentMethod === "pix") {
-      // await handleCreateOrder();
-      // redirecionar para página com chave pix
+      await handleCreateOrder(newOrder);
+      router.push("/orders");
     } else if (paymentMethod === "dinheiro") {
       // enviar o pedido
       await handleCreateOrder(newOrder);
@@ -104,11 +102,11 @@ export default function Checkout() {
       <h2 className="text-xl font-bold mt-6 mb-2">
         Selecionar forma de pagamento
       </h2>
-      <div className="mb-4">
+      <div className="mb-2">
         <div className="flex items-center">
           <input
             type="radio"
-            id="card"
+            id="cartao"
             name="payment"
             value="cartao"
             className="mr-2"
@@ -143,9 +141,19 @@ export default function Checkout() {
         </div>
       </div>
 
+      {paymentMethod === "pix" ? (
+        <div className="mb-2">
+          <label>Chave PIX</label>
+          <br />
+          <label>dcta478j-196l-03fm-t6gh-4298er7845m2</label>
+        </div>
+      ) : (
+        <></>
+      )}
+
       {paymentMethod ? (
         <button
-          className="w-full bg-yellow-500 text-white py-2 rounded-lg shadow-md"
+          className=" w-full bg-yellow-500 text-white py-2 rounded-lg shadow-md"
           onClick={handleConfirmOrder}
         >
           Confirmar pedido
