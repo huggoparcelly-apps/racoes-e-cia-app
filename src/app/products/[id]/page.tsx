@@ -40,7 +40,7 @@ export default function ProductsPage({ params: { id } }: ProductPageProps) {
             />
           </div>
         </div>
-        <h2 className="text-xl text-gray-900 font-bold">R$ {product.price}</h2>
+        <h2 className="text-xl text-gray-900 font-bold">R$ {product.price.toFixed(2).replace('.', ',')}</h2>
         <div className="pb-4">
           <p className="text-sm text-gray-400">{product.description}</p>
         </div>

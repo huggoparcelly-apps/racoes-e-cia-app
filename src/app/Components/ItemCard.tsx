@@ -19,7 +19,7 @@ export default function ItemCard({ item }: ItemProps) {
 
       <div className="flex-grow">
         <h2 className="text-lg font-medium">{item.product.name}</h2>
-        <p className="text-gray-600">R$ {item.product.price}</p>
+        <p className="text-gray-600">R$ {item.product.price.toFixed(2).replace('.', ',')}</p>
       </div>
 
       <div className="flex items-center space-x-2">

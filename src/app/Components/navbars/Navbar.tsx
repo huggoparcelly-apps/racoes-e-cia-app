@@ -3,7 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 
-import { usePathname, useRouter } from "next/navigation";
+import { usePathname } from "next/navigation";
 
 import useAuthStore from "@/app/stores/authStore";
 import LoginButton from "../buttons/LoginButton";
@@ -13,13 +13,11 @@ import logo from "/public/logo.png";
 
 function Navbar() {
 
-  const user = useAuthStore(state => state.userToken);
-
-	const canRenderLogin = !user;
-
+  const token = useAuthStore(state => state.userToken);
+	const canRenderLogin = !token;
+  
   const pathname = usePathname();
   
-
   return (
     <nav className="fixed top-0 w-full flex item-center py-2 px-8 justify-between z-50 bg-yellow-300 text-slate-200">
       <Link

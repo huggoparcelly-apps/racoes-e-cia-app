@@ -38,7 +38,6 @@ const useSignUpWithEmailAndPassword = () => {
       if (newUser) {
         const token = await newUser.user.getIdToken();
         setToken(token);
-        setCookie("authToken", `${token}`, 1);
         
         const userDoc = {
           firebaseId: newUser.user.uid,
@@ -49,7 +48,6 @@ const useSignUpWithEmailAndPassword = () => {
         await axios.post(`${BASE_URL}`, userDoc)
           .then(response => {
             if (response.status === 201 && response.data.firebaseId) {
-              sessionStorage.setItem("user-token", JSON.stringify(token));
               loginUser(response.data)
             }
           })

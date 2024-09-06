@@ -1,4 +1,5 @@
 import useAuthStore from "@/app/stores/authStore";
+import { User } from "@/app/types/User";
 import { auth } from "@/services/firebase/firebaseConfig";
 import setCookie from "@/services/helpers/setCookie";
 import axios from "axios";
@@ -23,7 +24,6 @@ const useGoogleAuth = () => {
       let existsUser = false;
       if (newUser) {
         const token = await newUser.user.getIdToken();
-        setCookie("authToken", `${token}`, 1);
         setToken(token);
 
         await axios
@@ -48,7 +48,6 @@ const useGoogleAuth = () => {
 
         await axios.post(`${BASE_URL}`, userDoc).then((response) => {
           if (response.status === 201 && response.data.firebaseId) {
-            localStorage.setItem("user-info", JSON.stringify(response.data));
             loginUser(response.data);
           }
         });

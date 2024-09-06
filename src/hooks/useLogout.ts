@@ -12,8 +12,6 @@ const useLogout = () => {
   const handleLogout = async () => {
     try {
       await signOut();
-      setCookie("authToken", null, 1);
-      sessionStorage.removeItem("user-token");
       logoutUser();
       router.refresh();
     } catch (error: any) {

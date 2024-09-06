@@ -7,6 +7,6 @@ export type User = {
   phone: string;
   orders?: Order[];
   addresses?: Address[]; 
-  role: string;
+  // role: string;
   firebaseId?: string;
 }

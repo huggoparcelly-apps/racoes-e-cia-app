@@ -19,7 +19,7 @@ export default function ProductCard({ product }: ProductProps) {
           <p className="mt-1 text-sm text-gray-500 w-44">
             {product.description}
           </p>
-          <p>R$ {product.price}</p>
+          <p>R$ {product.price.toFixed(2).replace('.', ',')}</p>
         </Link>
       </div>
 

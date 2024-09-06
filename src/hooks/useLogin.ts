@@ -33,12 +33,10 @@ const useLogin = () => {
       }
       if (userCred) {
         const token = await userCred.user.getIdToken();
-        setCookie("authToken", `${token}`, 1);
         setToken(token);
 
         await axios.get(`${BASE_URL}/${userCred.user.uid}`)
           .then(response => {
-            sessionStorage.setItem("user-token", JSON.stringify(token));
             loginUser(response.data)
           });
       }
