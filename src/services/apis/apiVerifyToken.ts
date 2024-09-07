@@ -4,11 +4,13 @@ import axios from "axios";
 const API_URL = process.env.NEXT_PUBLIC_BASE_API_URL;
 const BASE_URL = `${API_URL}/verifyToken`;
 
-export const verifyToken = async (token: Token | null) => {
+export const verifyToken = async (token : string ) => {
+  
   try {
-    const { data } = await axios.post(BASE_URL, token, {
+    const { data } = await axios.get(BASE_URL, {
       headers: {
         'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`
       },
       
     });

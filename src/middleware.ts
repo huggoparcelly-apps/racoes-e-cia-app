@@ -6,10 +6,10 @@ import { verifyToken } from './services/apis/apiVerifyToken';
 export async function middleware(request: NextRequest) {
   const url = request.nextUrl.clone();
   
-
   const protectedRoutes = ['/admin', '/orders', '/checkout'];
 
   if (protectedRoutes.some(route => url.pathname.startsWith(route))) {
+    
     const token = request.cookies.get('authToken');
     
     if (!token) {
@@ -18,11 +18,8 @@ export async function middleware(request: NextRequest) {
     }
 
     try {
-      const tokenBody: Token = {
-        token: token.value
-      }
       
-      const result = await verifyToken(tokenBody);
+      const result = await verifyToken(token.value);
 
       if (!result.valid) {
         url.pathname = '/auth';
