@@ -58,6 +58,31 @@ export const getAllOrders = async (token: string | null) => {
   }
 };
 
+export const getAllAdminOrders = async (token: string | null) => {
+  try {
+    const { data } = await axios.get(`${BASE_URL}/admin`, {
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`
+      },
+    });
+
+    return data;
+  } catch (error: any) {
+    if (axios.isAxiosError(error)) {
+      console.error(`Erro de rede: ${error.message}`);
+      console.error(`Status: ${error.response?.statusText}`);
+      console.error(`Dados de erro: ${JSON.stringify(error.response?.data)}`);
+    } else {
+      console.error(`Erro inesperado: ${error.message}`);
+    }
+
+    throw new Error(
+      "Falha ao buscar pedidos. Por favor, tente novamente mais tarde."
+    );
+  }
+};
+
 export const getOrderById = async (token: string | null, orderId: number) => {
   try {
     const { data } = await axios.get(`${BASE_URL}/${orderId}`, {

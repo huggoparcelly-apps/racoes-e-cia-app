@@ -3,8 +3,7 @@
 import OrderManagement from "@/app/Components/orders/OrderManagement";
 import useAuthStore from "@/app/stores/authStore";
 import { Order } from "@/app/types/Order";
-import { StatusOrder } from "@/app/types/StatusEnum";
-import { getAllOrders } from "@/services/apis/apiOrders";
+import { getAllAdminOrders } from "@/services/apis/apiOrders";
 import { useEffect, useState } from "react";
 
 export default function AdminOrders() {
@@ -15,7 +14,7 @@ export default function AdminOrders() {
 
   useEffect(() => {
     const getOrders = async () => {
-      const allOrders = await getAllOrders(userToken);
+      const allOrders = await getAllAdminOrders(userToken);
       setAllOrders(allOrders);
     };
     getOrders();
