@@ -1,6 +1,7 @@
 import useSignUpWithEmailAndPassword from "@/hooks/useSignUpWithEmailAndPassword";
-import { useRouter } from "next/navigation";
+import { Alert } from "@chakra-ui/react";
 import { useState } from "react";
+import { MdError } from "react-icons/md";
 
 interface Inputs {
   email: string;
@@ -10,25 +11,17 @@ interface Inputs {
 
 function SignUp() {
   const [showPassword, setShowPassword] = useState(false);
-  const{loading, error, signup} = useSignUpWithEmailAndPassword();
-  const [inputs, setInputs] = useState<Inputs>({ email: '', fullName: '', password: '' });
-
-  const router = useRouter();
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    try {
-      await signup(inputs);
-      router.back();
-    } catch (error) {
-      console.error("Login error:", error);
-    }
-  };
+  const { loading, error, signup } = useSignUpWithEmailAndPassword();
+  const [inputs, setInputs] = useState<Inputs>({
+    email: "",
+    fullName: "",
+    password: "",
+  });
 
   return (
     <div>
       <input
-        placeholder='Email'
+        placeholder="Email"
         className="border border-gray-300 rounded-md p-2 text-sm w-full mb-2"
         type="email"
         value={inputs.email}
@@ -36,7 +29,7 @@ function SignUp() {
       />
 
       <input
-        placeholder='Nome Completo'
+        placeholder="Nome Completo"
         className="border border-gray-300 rounded-md p-2 text-sm w-full mb-2"
         type="text"
         value={inputs.fullName}
@@ -45,7 +38,7 @@ function SignUp() {
 
       <div className="relative mt-2">
         <input
-          placeholder='Senha'
+          placeholder="Senha"
           className="border border-gray-300 rounded-md p-2 text-sm w-full"
           type={showPassword ? "text" : "password"}
           value={inputs.password}
@@ -58,27 +51,56 @@ function SignUp() {
             onClick={() => setShowPassword(!showPassword)}
           >
             {showPassword ? (
-              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13.875 18.825A10.05 10.05 0 0112 19c-5.523 0-10-4.477-10-10S6.477 0 12 0s10 4.477 10 10c0 1.248-.228 2.44-.637 3.552M15 12l-6 6M9 6l6 6" />
+              <svg
+                className="w-5 h-5"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M13.875 18.825A10.05 10.05 0 0112 19c-5.523 0-10-4.477-10-10S6.477 0 12 0s10 4.477 10 10c0 1.248-.228 2.44-.637 3.552M15 12l-6 6M9 6l6 6"
+                />
               </svg>
             ) : (
-              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13.875 18.825A10.05 10.05 0 0112 19c-5.523 0-10-4.477-10-10S6.477 0 12 0s10 4.477 10 10c0 1.248-.228 2.44-.637 3.552M15 12l-6 6M9 6l6 6" />
+              <svg
+                className="w-5 h-5"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M13.875 18.825A10.05 10.05 0 0112 19c-5.523 0-10-4.477-10-10S6.477 0 12 0s10 4.477 10 10c0 1.248-.228 2.44-.637 3.552M15 12l-6 6M9 6l6 6"
+                />
               </svg>
             )}
           </button>
         </div>
       </div>
 
+      {error && (
+        <Alert status="error">
+          <MdError size={30} color="red" />
+          {error.message.replace("Firebase:", "")}
+        </Alert>
+      )}
+
       <button
         className="w-full text-white bg-black mt-4 p-2 text-sm rounded-md"
-        onClick={handleSubmit}
+        onClick={() => signup(inputs)}
         disabled={loading}
       >
-        {loading ? 'Loading...' : 'Criar'}
+        {loading ? "Loading..." : "Criar"}
       </button>
     </div>
-  )
+  );
 }
 
-export default SignUp
+export default SignUp;

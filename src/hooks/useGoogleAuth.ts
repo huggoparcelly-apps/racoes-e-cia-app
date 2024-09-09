@@ -1,9 +1,8 @@
 import useAuthStore from "@/app/stores/authStore";
-import { User } from "@/app/types/User";
 import { auth } from "@/services/firebase/firebaseConfig";
-import setCookie from "@/services/helpers/setCookie";
 import axios from "axios";
 import { useSignInWithGoogle } from "react-firebase-hooks/auth";
+import useShowToast from "./useShowToast";
 
 const API_URL = process.env.NEXT_PUBLIC_BASE_API_URL;
 const BASE_URL = `${API_URL}/user`;
@@ -13,12 +12,14 @@ const useGoogleAuth = () => {
   const loginUser = useAuthStore((state) => state.login);
   const setToken = useAuthStore((state) => state.setUserToken);
 
+  const showToast = useShowToast();
+
   const handleGoogleAuth = async () => {
     try {
       const newUser = await signInWithGoogle();
-    
+
       if (!newUser && error) {
-        throw new Error(`Error ${error.message}`);
+        return showToast("Error", error.message, "error");
       }
 
       let existsUser = false;
@@ -29,7 +30,7 @@ const useGoogleAuth = () => {
         await axios
           .get(`${BASE_URL}/${newUser.user.uid}`)
           .then((response) => {
-            loginUser(response.data)
+            loginUser(response.data);
             existsUser = true;
           })
           .catch((err) => {
@@ -53,7 +54,7 @@ const useGoogleAuth = () => {
         });
       }
     } catch (error: any) {
-      throw new Error(`Error ${error.message}`);
+      showToast("Error", error.message, "error");
     }
   };
 

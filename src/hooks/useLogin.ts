@@ -1,14 +1,15 @@
 import useAuthStore from "@/app/stores/authStore";
 import { auth } from "@/services/firebase/firebaseConfig";
-import setCookie from "@/services/helpers/setCookie";
 import axios from "axios";
 import { useSignInWithEmailAndPassword } from "react-firebase-hooks/auth";
+import useShowToast from "./useShowToast";
 
 const API_URL = process.env.NEXT_PUBLIC_BASE_API_URL;
 const BASE_URL = `${API_URL}/user`;
 
 const useLogin = () => {
 
+  const showToast = useShowToast();
   const [signInWithEmailAndPassword, , loading, error] = useSignInWithEmailAndPassword(auth);
   const loginUser = useAuthStore(state => state.login);
   const setToken = useAuthStore((state) => state.setUserToken);
@@ -21,7 +22,7 @@ const useLogin = () => {
   const login = async (inputs: LoginInputs) => {
 
     if (!inputs.email || !inputs.password) {
-      throw new Error("Please fill all the fields");
+      return showToast("Error", "Please fill all the fields", "error");
     }
 
     try {
@@ -29,7 +30,7 @@ const useLogin = () => {
       const userCred = await signInWithEmailAndPassword(inputs.email, inputs.password);
 
       if (!userCred && error) {
-        throw new Error(`Error ${error.message}`);
+        return showToast("Error", error.message, "error");
       }
       if (userCred) {
         const token = await userCred.user.getIdToken();
@@ -42,7 +43,7 @@ const useLogin = () => {
       }
 
     } catch (error: any) {
-      throw new Error(`Error ${error.message}`);
+      showToast("Error", error.message, "error");
     }
 
   }

@@ -3,11 +3,14 @@ import { useCartStore } from "@/app/stores/cartStore";
 import { Order } from "@/app/types/Order";
 import { createNewOrder, createStripeOrder } from "@/services/apis/apiOrders";
 import { useState } from "react";
+import useShowToast from "./useShowToast";
 
 const useCreateOrder = () => {
   const { cart, address, paymentMethod } = useCartStore();
   const [isLoading, setIsLoading] = useState(false);
   const { userToken, user } = useAuthStore();
+
+  const showToast = useShowToast();
 
   const subTotal = cart.reduce(
     (sum, item) => sum + item.product.price * item.quantity,
@@ -17,18 +20,14 @@ const useCreateOrder = () => {
   const total = subTotal + rateTaxe;
 
   const handleCreateOrder = async (newOrder: Order) => {
-
     try {
-      
-      if(paymentMethod == 'cartao') {
+      if (paymentMethod == "cartao") {
         await createStripeOrder(newOrder, userToken);
-
       } else {
-        await createNewOrder(newOrder, userToken)
+        await createNewOrder(newOrder, userToken);
       }
-
     } catch (error: any) {
-      throw new Error(`Error ${error.message}`);
+      showToast("Error", error.message, "error");
     } finally {
       setIsLoading(false);
     }

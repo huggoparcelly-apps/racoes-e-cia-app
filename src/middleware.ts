@@ -1,6 +1,5 @@
 import type { NextRequest } from 'next/server';
 import { NextResponse } from 'next/server';
-import { Token } from './app/types/Token';
 import { verifyToken } from './services/apis/apiVerifyToken';
 
 export async function middleware(request: NextRequest) {
@@ -10,7 +9,7 @@ export async function middleware(request: NextRequest) {
 
   if (protectedRoutes.some(route => url.pathname.startsWith(route))) {
     
-    const token = request.cookies.get('authToken');
+    const token = request.cookies.get('authToken')?.value || "";
     
     if (!token) {
       url.pathname = '/auth';
@@ -18,14 +17,18 @@ export async function middleware(request: NextRequest) {
     }
 
     try {
-      
-      const result = await verifyToken(token.value);
+      const result = await verifyToken(token);
 
       if (!result.valid) {
         url.pathname = '/auth';
         return NextResponse.redirect(url);
       }
 
+      if(url.pathname.startsWith('/admin') && result.role != 'admin') {
+        url.pathname = '/401';
+        return NextResponse.redirect(url);
+      }
+      
       return NextResponse.next();
     } catch (error) {
       url.pathname = '/auth';
@@ -37,5 +40,9 @@ export async function middleware(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ['/((?!api|_next/static|favicon.ico).*)'],
+  matcher: [
+    '/admin/:path*', 
+    '/orders/:path*', 
+    '/checkout/:path*',
+    '/((?!api|_next/static|favicon.ico).*)'],
 };

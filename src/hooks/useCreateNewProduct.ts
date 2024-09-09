@@ -4,27 +4,21 @@ import { createNewProduct } from "@/services/apis/apiProducts";
 import { storage } from "@/services/firebase/firebaseConfig";
 import { getDownloadURL, ref, uploadString } from "firebase/storage";
 import { useState } from "react";
+import useShowToast from "./useShowToast";
 
 const useCreateNewProduct = () => {
   const [isLoading, setIsLoading] = useState(false);
   const createProduct = useProductStore((state) => state.createProduct);
+  const showToast = useShowToast();
 
   const handleCreateProduct = async (selectedFile: string | ArrayBuffer | null, product: Product) => {
     if (!product.name || !product.price || !product.quantity) {
-      throw new Error("Please fill all the fields");
+      return showToast("Please fill all the fields");
     }
 
     if (isLoading) return;
-    if (!selectedFile) throw new Error("Please select an image");
+    if (!selectedFile) return showToast("Please select an image");
     setIsLoading(true);
-
-    const newProduct: Product = {
-      name: product.name,
-      description: product.description,
-      category: product.category,
-      price: product.price,
-      quantity: product.quantity,
-    };
 		
     try {
       const newImageId = Date.now();
@@ -32,7 +26,14 @@ const useCreateNewProduct = () => {
       await uploadString(imageRef, selectedFile.toString(), "data_url");
       const downloadURL = await getDownloadURL(imageRef);
 			
-      newProduct.image = downloadURL;
+      const newProduct: Product = {
+        name: product.name,
+        description: product.description,
+        category: product.category,
+        price: product.price,
+        quantity: product.quantity,
+        image: downloadURL
+      };
 			
       await createNewProduct(newProduct).then((response) => {
         if (response.data) {
@@ -41,7 +42,7 @@ const useCreateNewProduct = () => {
         }
       });
     } catch (error: any) {
-      throw new Error(`Error ${error.message}`);
+      showToast("Error", error.message, "error");
     } finally {
       setIsLoading(false);
     }

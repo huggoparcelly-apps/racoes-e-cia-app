@@ -8,6 +8,7 @@ import Navbar from "./Components/navbars/Navbar";
 import { ProductsProvider } from "./Context/ProductsContext";
 import "./globals.css";
 import { OrdersProvider } from "./Context/OrdersContext";
+import { ChakraProvider } from "@chakra-ui/react";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -24,20 +25,20 @@ export default function RootLayout({
   return (
     <html lang="pt">
       <body className={clsx(inter.className, "bg-slate-200")}>
-        <Hydrate>
-          <div className="flex flex-col h-screen">
-            <Navbar />
-            <BackButton />
-            <main className="flex-grow overflow-y-auto pt-32">
-              <ProductsProvider>
-                <OrdersProvider>
-                {children}
-                </OrdersProvider>
-              </ProductsProvider>
-            </main>
-            <Footer />
-          </div>
-        </Hydrate>
+        <ChakraProvider>
+          <Hydrate>
+            <div className="flex flex-col h-screen">
+              <Navbar />
+              <BackButton />
+              <main className="flex-grow overflow-y-auto pt-32">
+                <ProductsProvider>
+                  <OrdersProvider>{children}</OrdersProvider>
+                </ProductsProvider>
+              </main>
+              <Footer />
+            </div>
+          </Hydrate>
+        </ChakraProvider>
       </body>
     </html>
   );
