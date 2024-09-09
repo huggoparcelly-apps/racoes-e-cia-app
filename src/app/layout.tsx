@@ -25,8 +25,8 @@ export default function RootLayout({
   return (
     <html lang="pt">
       <body className={clsx(inter.className, "bg-slate-200")}>
-        <ChakraProvider>
-          <Hydrate>
+        <Hydrate>
+          <ChakraProvider>
             <div className="flex flex-col h-screen">
               <Navbar />
               <BackButton />
@@ -37,8 +37,8 @@ export default function RootLayout({
               </main>
               <Footer />
             </div>
-          </Hydrate>
-        </ChakraProvider>
+          </ChakraProvider>
+        </Hydrate>
       </body>
     </html>
   );

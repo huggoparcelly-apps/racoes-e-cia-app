@@ -1,4 +1,3 @@
-import { Token } from "@/app/types/Token";
 import axios from "axios";
 
 const API_URL = process.env.NEXT_PUBLIC_BASE_API_URL;
