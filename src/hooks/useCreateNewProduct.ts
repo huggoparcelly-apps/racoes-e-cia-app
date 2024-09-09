@@ -13,11 +13,11 @@ const useCreateNewProduct = () => {
 
   const handleCreateProduct = async (selectedFile: string | ArrayBuffer | null, product: Product) => {
     if (!product.name || !product.price || !product.quantity) {
-      return showToast("Please fill all the fields");
+      return showToast("Error", "Please fill all the fields", "error");
     }
 
     if (isLoading) return;
-    if (!selectedFile) return showToast("Please select an image");
+    if (!selectedFile) return showToast("Error", "Please select an image", "error");
     setIsLoading(true);
 		
     try {
@@ -38,7 +38,7 @@ const useCreateNewProduct = () => {
       await createNewProduct(newProduct).then((response) => {
         if (response.data) {
           createProduct({ ...newProduct, id: response.data.id });
-          console.log("Success", response.data.message, "success");
+          showToast("Success", response.data.message, "success");
         }
       });
     } catch (error: any) {

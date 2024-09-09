@@ -14,7 +14,7 @@ const usePreviewImg = () => {
     if (file && file.type.startsWith("image/")) {
       if (file.size > maxFIleSizeInBytes) {
         setSelectedFile(null);
-        return showToast("File size must be less than 6MB");
+        return showToast("Error", "File size must be less than 6MB", "error");
       }
 
       const reader = new FileReader();
@@ -26,7 +26,7 @@ const usePreviewImg = () => {
       reader.readAsDataURL(file);
     } else {
       setSelectedFile(null);
-      return showToast("Please select an image file");
+      return showToast("Error", "Please fill all the fields", "error");
     }
   };
 
