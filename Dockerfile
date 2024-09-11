@@ -19,9 +19,6 @@ RUN npm run build
 # Reduza a imagem final
 FROM node:20-alpine AS runner
 
-# Defina a variável de ambiente NODE_ENV para produção
-ENV NODE_ENV=production
-
 # Defina o diretório de trabalho
 WORKDIR /app
 
