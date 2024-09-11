@@ -4,6 +4,7 @@ import setCookie from "@/services/helpers/setCookie";
 import axios from "axios";
 import { useCreateUserWithEmailAndPassword } from "react-firebase-hooks/auth";
 import useShowToast from "./useShowToast";
+import { User } from "@/app/types/User";
 
 interface Inputs {
   email: string;
@@ -49,7 +50,13 @@ const useSignUpWithEmailAndPassword = () => {
 
         await axios.post(`${BASE_URL}`, userDoc).then((response) => {
           if (response.status === 201 && response.data.firebaseId) {
-            loginUser(response.data);
+            const userResponse: User = {
+              id: response.data.id,
+              name: response.data.name,
+              firebaseId: response.data.firebaseId
+            }
+            
+            loginUser(userResponse)
           }
         });
       }

@@ -1,12 +1,23 @@
 'use client';
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import GoogleAuth from "./GoogleAuth";
 import Login from "./Login";
 import SignUp from "./SignUp";
-import GoogleAuth from "./GoogleAuth";
+import useAuthStore from "@/app/stores/authStore";
+import { usePathname, useRouter } from "next/navigation";
 
 function AuthForm() {
   const [isLogin, setIsLogin] = useState(true);
+  const token = useAuthStore(state => state.userToken);
+
+  const router = useRouter();
+
+  useEffect(() => {
+    if(token) {
+      router.back();
+    }
+  },[token, router])
 
   return (
     <div className="mt-5">

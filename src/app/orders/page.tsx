@@ -1,4 +1,5 @@
 'use client'
+
 import { getAllOrders } from "@/services/apis/apiOrders";
 import { useEffect } from "react";
 import OrderCard from "../Components/orders/OrderCard";

@@ -1,23 +1,35 @@
-# Use the official Node.js image
-FROM node:20
+# Use a imagem oficial do Node.js para a versão 20 (como mencionado)
+FROM node:20-alpine AS builder
 
-# Set the working directory
+# Defina o diretório de trabalho dentro do container
 WORKDIR /app
 
-# Copy package.json and package-lock.json
-COPY package*.json ./
+# Copie apenas os arquivos essenciais para a instalação de dependências
+COPY package.json package-lock.json* ./ 
 
-# Install dependencies
-RUN npm install
+# Instale as dependências em modo de build
+RUN npm ci --only=production
 
-# Copy the rest of the application code
+# Copie o restante dos arquivos da aplicação para dentro do container
 COPY . .
 
-# Build the Next.js application
+# Compile a aplicação Next.js
 RUN npm run build
 
-# Expose the port the app runs on
+# Reduza a imagem final
+FROM node:20-alpine AS runner
+
+# Defina a variável de ambiente NODE_ENV para produção
+ENV NODE_ENV=production
+
+# Defina o diretório de trabalho
+WORKDIR /app
+
+# Copie apenas o build e as dependências de produção da etapa anterior
+COPY --from=builder /app ./
+
+# Exponha a porta padrão do Next.js
 EXPOSE 3000
 
-# Start the application
+# Comando para iniciar a aplicação
 CMD ["npm", "run", "start"]

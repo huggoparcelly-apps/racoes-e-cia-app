@@ -3,6 +3,7 @@ import { auth } from "@/services/firebase/firebaseConfig";
 import axios from "axios";
 import { useSignInWithEmailAndPassword } from "react-firebase-hooks/auth";
 import useShowToast from "./useShowToast";
+import { User } from "@/app/types/User";
 
 const API_URL = process.env.NEXT_PUBLIC_BASE_API_URL;
 const BASE_URL = `${API_URL}/user`;
@@ -38,7 +39,13 @@ const useLogin = () => {
 
         await axios.get(`${BASE_URL}/${userCred.user.uid}`)
           .then(response => {
-            loginUser(response.data)
+            const userResponse: User = {
+              id: response.data.id,
+              name: response.data.name,
+              firebaseId: response.data.firebaseId
+            }
+            
+            loginUser(userResponse)
           });
       }
 

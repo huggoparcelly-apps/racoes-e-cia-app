@@ -3,6 +3,7 @@ import { auth } from "@/services/firebase/firebaseConfig";
 import axios from "axios";
 import { useSignInWithGoogle } from "react-firebase-hooks/auth";
 import useShowToast from "./useShowToast";
+import { User } from "@/app/types/User";
 
 const API_URL = process.env.NEXT_PUBLIC_BASE_API_URL;
 const BASE_URL = `${API_URL}/user`;
@@ -30,7 +31,13 @@ const useGoogleAuth = () => {
         await axios
           .get(`${BASE_URL}/${newUser.user.uid}`)
           .then((response) => {
-            loginUser(response.data);
+            const userResponse: User = {
+              id: response.data.id,
+              name: response.data.name,
+              firebaseId: response.data.firebaseId
+            }
+            
+            loginUser(userResponse)
             existsUser = true;
           })
           .catch((err) => {
@@ -49,7 +56,13 @@ const useGoogleAuth = () => {
 
         await axios.post(`${BASE_URL}`, userDoc).then((response) => {
           if (response.status === 201 && response.data.firebaseId) {
-            loginUser(response.data);
+            const userResponse: User = {
+              id: response.data.id,
+              name: response.data.name,
+              firebaseId: response.data.firebaseId
+            }
+            
+            loginUser(userResponse)
           }
         });
       }
