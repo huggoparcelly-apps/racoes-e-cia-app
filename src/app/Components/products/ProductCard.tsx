@@ -2,7 +2,6 @@ import Image from "next/image";
 import Link from "next/link";
 import { Product } from "../../types/Product";
 import AddCart from "../buttons/AddCart";
-import golden from "/public/racao-golden.webp";
 
 type ProductProps = {
   product: Product;
@@ -26,7 +25,7 @@ export default function ProductCard({ product }: ProductProps) {
       <div className="flex flex-col relative h-40 w-20 overflow-hidden rounded-md ">
         <Link href={`/products/${product.id}`}>
           <Image
-            src={product.image === 'image'? golden : product.image}
+            src={product.image}
             alt={product.description || "Ração"}
             width={80}
             height={128}

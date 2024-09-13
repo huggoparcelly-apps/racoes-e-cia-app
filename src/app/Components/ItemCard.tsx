@@ -1,7 +1,6 @@
 import Image from "next/image";
 import { Cart } from "../types/Cart";
 import { useCartStore } from "../stores/cartStore";
-import golden from "/public/racao-golden.webp";
 
 type ItemProps = {
   item: Cart;
@@ -15,7 +14,7 @@ export default function ItemCard({ item }: ItemProps) {
     <div
       className="flex items-center space-x-4 border-b p-2 shadow-sm"
     >
-      <Image src={golden} alt={item.product.name} className="w-16 h-16 object-cover" />
+      <Image src={item.product.image} alt={item.product.name} className="w-16 h-16 object-cover" />
 
       <div className="flex-grow">
         <h2 className="text-lg font-medium">{item.product.name}</h2>
