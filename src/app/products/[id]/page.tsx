@@ -5,7 +5,6 @@ import { useProductContext } from "@/app/Context/ProductsContext";
 import { getProductById } from "@/services/apis/apiProducts";
 import Image from "next/image";
 import { useEffect } from "react";
-import golden from "/public/racao-golden.webp";
 
 type ProductPageProps = {
   params: {
@@ -32,7 +31,7 @@ export default function ProductsPage({ params: { id } }: ProductPageProps) {
         <div className="pb-4 flex flex-col items-center mt-3">
           <div className="flex items-end relative h-42 w-32 overflow-hidden rounded-md ">
             <Image
-              src={product.image === 'image'? golden : product.image}
+              src={product.image}
               alt={product.description || "Ração Para Cachorro"}
               width={160}
               height={128}

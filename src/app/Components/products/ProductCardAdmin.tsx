@@ -1,8 +1,7 @@
 import { Product } from "@/app/types/Product";
 import Image from "next/image";
-import golden from "/public/racao-golden.webp";
-import { MdModeEditOutline } from "react-icons/md";
 import { IoTrash } from "react-icons/io5";
+import { MdModeEditOutline } from "react-icons/md";
 
 type ProductProps = {
   product: Product;
@@ -37,7 +36,7 @@ function ProductCardAdmin({ product }: ProductProps) {
       <div className="flex flex-col relative h-40 w-20 overflow-hidden rounded-md ">
         
           <Image
-            src={golden}
+            src={product.image}
             alt={product.description || "Ração"}
             className="h-32 w-20 object-cover object-center"
           />

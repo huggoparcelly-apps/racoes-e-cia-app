@@ -1,37 +1,88 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Bem-vindo ao Projeto Rações e Cia - Front-end 🐾
 
-## Getting Started
+Esse projeto faz parte do meu Trabalho de Conclusão de Curso e tem como objetivo desenvolver um front-end para um sistema de pedidos de um petshop, colocando em prática os aprendizados obtidos durante a graduação.
 
-First, run the development server:
+Aqui você vai encontrar alguns detalhes sobre o projeto, bem como instruções para baixar o projeto localmente.
+Obrigado por acessar!
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+---
+
+# 🛠️ Tecnologias Utilizadas
+
+ - Node.js
+ - React
+ - NextJs
+ - TypeScript
+ - Zustand
+ - Tailwind CSS
+ - Firebase Autenticação
+ - Docker
+ - Stripe
+
+---
+
+# 📋 Rotas Disponíveis
+
+  ### /products
+  - Exibe a lista de produtos disponíveis para compra.
+  ### /orders
+  - Mostra o histórico de pedidos do usuário (rota protegida).
+  ### /orders/id 
+  - Detalhes de um pedido específico do usuário (rota protegida).
+  ### /cart
+  - Página do carrinho de compras, onde o usuário pode revisar e atualizar os produtos.
+  ### /login
+  - Página para autenticação de usuários.
+  ### /admin/products
+  - Permite ao admin adicionar, editar ou remover produtos.
+  ### /admin/orders
+  - Permite ao admin gerenciar os pedidos e alterar os status.
+
+---
+
+# 🚀 Como Executar o Projeto Localmente
+
+## Pré-requisitos
+- Node.js (versão 20 ou superior)
+- Docker e Docker Compose
+- Conta no Firebase
+- Conta no Stripe
+
+## Passos para Instalação
+#### 1. Clone o repositório:
+
+```
+git clone https://github.com/huggoparcelly/racoes-e-cia-app.git
+cd racoes-e-cia-app
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+#### 2. Instale as dependências:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```
+npm install
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+#### 3. Configure as variáveis de ambiente:
 
-## Learn More
+Crie um arquivo .env na raiz do projeto com as seguintes variáveis:
 
-To learn more about Next.js, take a look at the following resources:
+```
+NEXT_PUBLIC_FIREBASE_API_KEY=firebasekey
+NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN=firebasedomain
+NEXT_PUBLIC_FIREBASE_PROJECT_ID=firebaseprojectid
+NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET=firebasestoragebucket
+NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID=firebasemessagingsender
+NEXT_PUBLIC_BASE_API_URL=http://localhost:3001
+NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY=stripekey
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+#### 4. Utilizando Docker:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+``` 
+docker-compose up
+```
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
-# Rações e Cia Web Application
+#### 5. A aplicação estará disponível em:
+http://localhost:3000
+ 
+---
